@@ -123,6 +123,12 @@
 				color: white; /* Default text color */
 			}
 
+			/* Hover effect */
+			.filter-bar p:hover {
+				background-color: lightgray; /* Change to desired hover background color */
+				color: black; /* Change to desired hover text color */
+			}
+
 			/* Color styles for filter buttons based on data-color attribute */
 			.filter-bar p[data-color="white"] {
 				color: white;
@@ -147,6 +153,14 @@
 			.filter-bar p[data-color="#cb9af9"] {
 				color: #cb9af9;
 			}
+			.filter-bar p[data-color="#e04050"] {
+				color: #e04050;
+			}
+
+			.filter-bar p[data-color="#f8f99a"] {
+				color: #f8f99a;
+			}
+		
 
 			/* Icon color styles */
 			.filter-bar p i {
@@ -176,6 +190,15 @@
 			.filter-bar p[data-color="#cb9af9"] i {
 				color: #cb9af9;
 			}
+
+			.filter-bar p[data-color="#e04050"] i {
+				color: #e04050;
+			}
+
+			.filter-bar p[data-color="#f8f99a"] i {
+				color: #f8f99a;
+			}
+			
 
 			/* Styles for the active class */
 			.filter-bar p.active {
@@ -230,6 +253,21 @@
 			.filter-bar p.active i[data-color="#cb9af9"] {
 				color: #cb9af9;
 			}
+
+			.filter-bar p.active i[data-color="#e04050"] {
+				color: #e04050;
+			}
+
+			.filter-bar p.active i[data-color="#cb9af9"] {
+				color: #cb9af9;
+			}
+
+			.filter-bar p.active i[data-color="#f8f99a"] {
+				color: #f8f99a;
+			}
+
+			
+
 		</style>
 	
 	<script>
@@ -352,7 +390,8 @@
 									<p data-type="Data Science" data-color="#40E0D0"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
 									<p data-type="UX Design" data-color="#9af9cb"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
 									<p data-type="Writing" data-color="#ffc04c"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
-									<p data-type="Frontend Development" data-color="#cb9af9"> <i class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
+									<p data-type="Frontend Development" data-color="#cb9af9"> <i class="fa-solid fa-tags"></i> <b>Frontend Dev</b></p>
+									<p data-type="Marketing Content" data-color="#e04050"> <i class="fa-solid fa-tags"></i> <b>Marketing</b></p>
 								</div>
 								
 									
@@ -500,7 +539,7 @@
 								<div class="container articles-container">
 									<div class="card" id="anchor2" data-type="Technical Documentation Frontend Development Marketing Content">
 										<div class="card-image">
-											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/modalai.png" alt="OpenBrand Logo" />
+											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/modalai2.png" alt="OpenBrand Logo" />
 										</div>
 										<div class="category" style="font-size: 1.6em;"> ModalAI - Technical Documentation and Product Marketing Intern</div>
 										<div class="heading">Jun 2021 - Dec 2022
@@ -575,9 +614,9 @@
 										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;">Cognitive Science is an Interdisiplinary focus on neuroscience, computer science, linguistics, and philosophy. My specialization in HCI covers all aspects of the UX design process and gives me a strong background in UI Design, Frontend programming, Usability Analysis, and other Research/Analytical Roles. </p>
 										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
 											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;"> <i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #f8f99a;"> <i style="color: #f8f99a;" class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #e04050;"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
+											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
+											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #9af9cb;"> <i style="color: #9af9cb;" class="fa-solid fa-tags"></i> <b>UX Design</b></p>
+											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #ffc04c;"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
 										</div>
 									</div>
 								</div>	
@@ -721,12 +760,13 @@
 								
 								
 								<div class="container articles-container">
-									<div class="card" id="anchor3" data-type="Personal">
+									<div class="card" id="anchor2" data-type="Personal">
+										
 										<div class="category" style="font-size: 1.6em;"> Personal Projects</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;">Cognitive Science is an Interdisiplinary focus on neuroscience, computer science, linguistics, and philosophy. My specialization in HCI covers all aspects of the UX design process and gives me a strong background in UI Design, Frontend programming, Usability Analysis, and other Research/Analytical Roles. </p>
+										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;"> Personal Projects and Other Consulting Work </p>
 										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;"> <i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #f8f99a;"> <i style="color: #f8f99a;" class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
+											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i style="color: #40E0D0;" class="fa-solid fa-tags"></i> <b>Data Science</b></p>
+											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;"> <i style="color: #cb9af9;" class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
 										</div>
 									</div>
 								</div>
