@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Matt Lohier</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+	<script src="https://kit.fontawesome.com/2e3355ca3e.js" crossorigin="anonymous"></script>
+</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="index.html" class="logo" style="font-size:x-large;">
+						<div> <i class="fa-solid fa-circle-arrow-left"></i></div>
+						<span class="title" style="letter-spacing: 0.1em;">Back</span>
+					</a>
+					<!-- Nav -->
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<div class="pb" style="top:0;"></div>
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+					<h1 style="margin:0;">Divorce Rates and Economic Conditions</h1>
+					<div style="display: flex; gap: 0.5em;">
+						<div style="display: flex; justify-content: left; gap: 1em; color: #40E0D0">
+							<p style="text-align: center; margin: 0em; font-size: x-large;"> <i class="fa-solid fa-tags"></i> <b>Data Science —</b></p>
+						</div>
+						<div style="display: flex; align-self: center; gap: 1em; color: #40E0D0">
+							<p style="text-align: center; margin: 0em;"> <i class="fa-solid fa-screwdriver-wrench"></i> <b>Python</b></p>
+							<p style="text-align: center; margin: 0em;"> <i class="fa-solid fa-screwdriver-wrench"></i> <b>Pandas</b></p>
+							<p style="text-align: center; margin: 0em;"> <i class="fa-solid fa-screwdriver-wrench"></i> <b>Matplotlib</b></p>
+							<p style="text-align: center; margin: 0em;"> <i class="fa-solid fa-screwdriver-wrench"></i> <b>Statsmodels</b></p>
+						</div>
+					</div>
+					<p style="margin:0;"> <b> UCSD - COGS	108 Wi '22 </b></p>
+					<br />
+					<h3 style="margin:0;">Background</h3>
+					<p> Cogs 108, Data Science in Practice, is a hands-on, practical course intended to give students experience working on data science projects. The course goals are to formulate a plan for and complete a data science project from start (question) to finish (communication). This includes identifying and explaining how to approach an unfamiliar data science task, carrying out descriptive, exploratory, inferential, and predictive analyses in Python, and communicating results concisely and effectively in reports and presentations. </p>
+					<span class="image main"><img style="width: 50%; display: block; float: right; margin-right: 2em; padding: 1em;" src="images/articles/pandas2.JPG" alt="" /></span>
+					<h3 style="margin:0;">Project Proposal and Datasets</h3>
+					<p>
+						My team and I wanted to analyze divorce rates and divorce culture in the United States. We first did background research on the reasons for divorce to identify some variables we could use for a data science project. One reason for divorce are issues with finances or with money management, and we were curious to see what outside variables might impact this. We began looking at variables related to the health of the economy to see whether people were more likely to get divorced based on economic turmoil or prosperity. A big question for us was whether economic stress disincentive divorce due to the personal financial risks that come with it, or whether economic stress incentivized divorce by worsening intermarital issues relating to finance and money management. In order to answer this, we modeled how divorce rates in the United States change with unemployment rates, household income, and household debt. We felt these variables gave a good sense of the economic situation of real Americans and that they would be fitting for our analysis.
+					</p>
+					<span class="image main"><img style="width: 50%; display: block; float: left; margin-right: 2em; padding:1em;" src="images/articles/pandas1.JPG" alt="" /></span>
+					<h3 style="margin:0;">Data Cleaning</h3>
+					<p>We built our project in a Jupyter Notebook and started by cleaning our data. Each member of the group cleaned a particular dataset using Pandas dataframes. We dropped duplicates, removed NaN values, reset indexes, removed extra white spaces, dropped unneeded columns, and more. </p>
+					<h3 style="margin:0;">EDA</h3>
+					<p>
+						We then did exploratory data analysis to understand the numbers we were working with. For each variable, we plotted line graphs and histograms to understand the distribution and the change over time. We used seaborn and matplotlib for our graphs. I handled the TDSP section and found that the data indicates that Divorce/Married increased with TDSP until the 2008 recession. After the 2008 recession, Divorce/Married continues to increase, wheras TDSP continues to decrease. Based on this graph, it is clear the variables don't necessarily move in the same directions at the same times, though there is evidence that both variables tend to change with the similar volatilities. When TDSP rapidly decreased after 08, Divorce/Married rapidly increased, which is seen again in 2020 during the economic turmoil of the Coronavirus pandemic.
+					</p>
+					<span class="image main"><img style="width: 50%; display: block; float: right; margin-right: 2em; padding: 1em;" src="images/articles/pandas3.JPG" alt="" /></span>
+					<h3 style="margin:0;">Regression Analysis and Results</h3>
+					<p>
+						Using statsmodels, patsy, and scipy, we conducted regression analyses to see if there is any correlation between divorce rates and our variables. Our null hypothesis is that there is no relationship between the variable and divorce rate and our alternate hypothesis is that there is a relationship between the variable and divorce rate. If we can get a p-value that is small (less than 0.05), then we can reject the null hypothesis and conclude that there is a significant correlation between the variable and divorce rate.
+					</p>
+					<span class="image main"><img style="width: 50%; display: block; float: right; margin-right: 2em; padding: 1em;" src="images/articles/pandas4.JPG" alt="" /></span>
+					<p> I started off by using statsmodels to create a regression. Then I printed out exploratory data about our model to understand how accurate it was. Immediately, things stood out. </p>
+					<ul>
+						<li> low R squared value shows our regression line is poor </li>
+						<li> T value is bigger for our intercept than for TDSP, further evidence our regression is poor </li>
+						<li> F stat is small and the difference between adjusted F stat and F stat is not particuarly big </li>
+						<li> residuals are not normally distributed </li>
+					</ul>
+					<p>
+						Result: <b> No strong correlation.</b> P is greater than alpha. Accept the null hypothesis. Only 14% of the variance in Divorce/Married corresponds to variance in TDSP.
+					</p>
+					<h3 style="margin:0;">The Problem</h3>
+					<p>
+						The model created above clearly does not do a good job at modeling the relationship between the two variables, and this can be attributed to the way TDSP decreased after 2008. After 2009, the economy was relanaced and the measure of household debt decreased. What this points to is that economic turmoils can cause radically changes that literally 'break' certain variables. Because TDSP is calcualted as the total required household debt payments to total disposable income, rebalancing after the recession either caused total disposable income to increase dramatically, or household debt payments changed radically. Given the 2009 recession's ties to subprime mortrages, it is likely that the household debt payments changed substantially.
+						For this reason, it may be intersting to understand how TDSP and Divorce/Married were correlated before this economic turmoil dramatically changed TDSP. Below, I remove the rows after 2009, and do a second regression on the data before 2009.
+					</p>
+					<h3 style="margin:0;">Using data up to 08'</h3>
+					<span class="image main" style="margin:0;"><img style="width: 50%; display: block; float: right; margin:0; margin-right: 2em; padding: 1em;" src="images/articles/pandas6.JPG" alt="" /></span>
+					<p> This second regression on the data up till 2008 shows we have a much better model and the two variables have a stronger correlation. </p>
+					<ul>
+						<li> R squared value is very high and is close adjusted R squared, showing our model is a good fit </li>
+						<li> The residuals are more evenly spread. </li>
+						<li> P values are similar for both, showing both variables are significant to the regression, evidence of good fit </li>
+						<li> F-Prob is very small, and F-Statistic is very large, showing more evidence of a linear relationship </li>
+						<li> Despite this, it must be pointed out that this has a considerably smaller sample size. </li>
+					</ul>
+					<p>
+						Result: <b> Strong correlation.</b> P is smaller than alpha so we reject the null hypothesis. 87.3% of the variance in Divorce/Married corresponds to variance in TDSP.
+					</p>
+					<p> <i> Note: This shows how easy it is to manipulate data to create a model that works. I'm just doing this to see what a strong model would look like, not to actually try and answer the question! </i></p>
+					<h3 style="margin:0;">What I learned</h3>
+					<p>
+						This project gave me a strong set of skills in Pandas and with python libraries for data analysis. I learned that variables related to economic conditions can change dramatically and can prove not to be good predictors even if they have a history with a strong correlation. I also learned that it is challenging to create a good model, and that it is critical to pick the correct variables.  A big secondary question for us was whether economic stress disincentivizes divorce due to the personal financial risks that come with it, or whether economic stress incentivized divorce by worsening intermarital issues relating to finance and money management. I don’t think we did the greatest job at answering this question given our data. If we were to do this project again, I think we could have more insight on the nuances of that question.
+					</p>
+					<a href="google.com" class="button primary"> Link to Project</a>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<section id="anchor3">
+						<h2 style="color: white;">Get in touch</h2>
+						<form method="post" action="https://formspree.io/f/xlevolyb">
+							<div class="fields">
+								<div class="field half">
+									<input type="text" name="name" id="name" placeholder="Name" />
+								</div>
+								<div class="field half">
+									<input type="email" name="email" id="email" placeholder="Email" />
+								</div>
+								<div class="field">
+									<textarea name="message" id="message" placeholder="Message"></textarea>
+								</div>
+							</div>
+							<ul class="actions">
+								<li><input type="submit" value="Send" class="primary" /></li>
+							</ul>
+						</form>
+					</section>
+					<section>
+						<h2 style="color: white;">Contact</h2>
+						<ul class="icons">
+							<li><a href="#" class="icon brands style2 fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+							<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</section>
+				</div>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
