@@ -363,13 +363,15 @@
 			const popupMessage = document.getElementById('popup-message');
 			popupOverlay.style.display = 'flex';
 	
-			// Store a flag in sessionStorage
-			sessionStorage.setItem('popupShown', 'true');
-	
 			setTimeout(() => {
 				popupMessage.style.borderColor = 'green'; // Change the border color to green
+	
+				// Hide the popup right before redirect
+				popupOverlay.style.display = 'none';
+				sessionStorage.removeItem('popupShown'); // Clear the flag
+	
 				setTimeout(() => {
-					window.location.href = url + (url.includes('?') ? '&' : '?') + 'popupShown=true';
+					window.location.href = url;
 				}, 100); // Short delay to allow the color change to be visible
 			}, 2000); // Change this value to adjust the duration
 		}
@@ -382,27 +384,16 @@
 			sessionStorage.removeItem('popupShown');
 		}
 	
-		function checkPopupShown() {
-			const urlParams = new URLSearchParams(window.location.search);
-			if (urlParams.get('popupShown') === 'true' || sessionStorage.getItem('popupShown') === 'true') {
-				hidePopup();
-				urlParams.delete('popupShown');
-				const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
-				history.replaceState(null, '', newUrl);
-			}
-		}
-	
 		window.onload = function() {
 			checkViewport();
-			checkPopupShown();
+	
+			// Check sessionStorage and hide the popup if already shown
+			if (sessionStorage.getItem('popupShown') === 'true') {
+				hidePopup();
+			}
 		};
 	
 		window.onresize = checkViewport;
-	
-		window.addEventListener('popstate', function() {
-			// Hide popup when navigating back
-			hidePopup();
-		});
 	
 		document.addEventListener('DOMContentLoaded', () => {
 			// Handle smooth scroll and adjust for image offset
