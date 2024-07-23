@@ -369,8 +369,7 @@
 			setTimeout(() => {
 				popupMessage.style.borderColor = 'green'; // Change the border color to green
 				setTimeout(() => {
-					// Redirect with a URL parameter
-					window.location.href = url + "?popupShown=true";
+					window.location.href = url + (url.includes('?') ? '&' : '?') + 'popupShown=true';
 				}, 100); // Short delay to allow the color change to be visible
 			}, 2000); // Change this value to adjust the duration
 		}
@@ -385,13 +384,11 @@
 	
 		function checkPopupShown() {
 			const urlParams = new URLSearchParams(window.location.search);
-			if (urlParams.get('popupShown') === 'true') {
+			if (urlParams.get('popupShown') === 'true' || sessionStorage.getItem('popupShown') === 'true') {
 				hidePopup();
 				urlParams.delete('popupShown');
-				const newUrl = window.location.pathname + '?' + urlParams.toString();
+				const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
 				history.replaceState(null, '', newUrl);
-			} else if (sessionStorage.getItem('popupShown') === 'true') {
-				hidePopup();
 			}
 		}
 	
@@ -509,6 +506,7 @@
 			showFilterPopup(color);
 		}
 	</script>
+	
 
 	</head>
 	<body class="is-preload">
