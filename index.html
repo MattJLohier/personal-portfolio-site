@@ -371,12 +371,15 @@
 				setTimeout(() => {
 					window.location.href = url;
 				}, 100); // Short delay to allow the color change to be visible
-			}, 1000); // Change this value to adjust the duration
+			}, 2000); // Change this value to adjust the duration
 		}
 	
 		function hidePopup() {
 			const popupOverlay = document.getElementById('popup-overlay');
 			popupOverlay.style.display = 'none';
+	
+			// Clear the flag in sessionStorage
+			sessionStorage.removeItem('popupShown');
 		}
 	
 		window.onload = function() {
@@ -393,7 +396,6 @@
 		window.addEventListener('popstate', function() {
 			// Hide popup when navigating back
 			hidePopup();
-			sessionStorage.removeItem('popupShown');
 		});
 	
 		document.addEventListener('DOMContentLoaded', () => {
