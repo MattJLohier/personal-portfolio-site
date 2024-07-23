@@ -34,6 +34,49 @@
 			#mobile-message {
 				display: none;
 			}
+
+			#popup-overlay {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.8);
+				justify-content: center;
+				align-items: center;
+				z-index: 1000;
+			}
+
+			#popup-message {
+				background: #282828;
+				padding: 2em;
+				border-radius: 10px;;
+				text-align: center;
+				color: white;
+				font-weight: 600;
+				font-size: 1.2em;
+				border: solid;
+				border-color: #9ac8f9;
+				border-width: 4px;
+			}
+
+			.wave {
+				display: inline-block;
+				animation: wave-animation 2s infinite;
+				transform-origin: 70% 70%;
+			}
+
+			@keyframes wave-animation {
+				0% { transform: rotate(0deg); }
+				10% { transform: rotate(14deg); }
+				20% { transform: rotate(-8deg); }
+				30% { transform: rotate(14deg); }
+				40% { transform: rotate(-4deg); }
+				50% { transform: rotate(10deg); }
+				60% { transform: rotate(0deg); }
+				100% { transform: rotate(0deg); }
+			}
 	
 			.container {
 				display: flex;
@@ -153,8 +196,8 @@
 			.filter-bar p[data-color="#cb9af9"] {
 				color: #cb9af9;
 			}
-			.filter-bar p[data-color="#e04050"] {
-				color: #e04050;
+			.filter-bar p[data-color="#4C3BCF"] {
+				color: #4C3BCF;
 			}
 
 			.filter-bar p[data-color="#f8f99a"] {
@@ -191,8 +234,8 @@
 				color: #cb9af9;
 			}
 
-			.filter-bar p[data-color="#e04050"] i {
-				color: #e04050;
+			.filter-bar p[data-color="#4C3BCF"] i {
+				color: #4C3BCF;
 			}
 
 			.filter-bar p[data-color="#f8f99a"] i {
@@ -254,8 +297,8 @@
 				color: #cb9af9;
 			}
 
-			.filter-bar p.active i[data-color="#e04050"] {
-				color: #e04050;
+			.filter-bar p.active i[data-color="#4C3BCF"] {
+				color: #4C3BCF;
 			}
 
 			.filter-bar p.active i[data-color="#cb9af9"] {
@@ -283,6 +326,20 @@
 		window.onload = checkViewport;
 		window.onresize = checkViewport;
 	
+
+		function showPopupAndRedirect(url) {
+			const popupOverlay = document.getElementById('popup-overlay');
+			const popupMessage = document.getElementById('popup-message');
+			popupOverlay.style.display = 'flex';
+
+			setTimeout(() => {
+				popupMessage.style.borderColor = 'green'; // Change the border color to green
+				setTimeout(() => {
+					window.location.href = url;
+				}, 100); // Short delay to allow the color change to be visible
+			}, 2000); // Change this value to adjust the duration
+		}
+
 		function filterProjects(type) {
 			const projects = document.querySelectorAll('article.style2');
 			const buttons = document.querySelectorAll('.filter-bar p');
@@ -369,7 +426,7 @@
 								<span class="symbol" style=" flex-direction: column; display: flex; justify-content: center; flex-wrap: wrap; align-items: center;">
 									<img class="img2" src="images/pic00.jpg" alt="" /> <h1 style="margin-bottom: 0.25em;">Matt Lohier</h1>
 									<div style="margin-bottom:1em;">Welcome to my Portfolio</div>
-									<a class="button primary" href="assets/files/resume-matt-lohier.pdf" onclick="gtag('event', 'Resume Click', {'event_category': 'Button', 'event_label': 'Resume Download'});">Resume</a>
+									<a class="button primary" href="javascript:void(0);" onclick="gtag('event', 'Resume Click', {'event_category': 'Button', 'event_label': 'Resume Download'}); showPopupAndRedirect('assets/files/resume-matt-lohier.pdf');">Resume</a>
 								</span>
 								
 								<br />
@@ -388,13 +445,17 @@
 									<p data-type="all" data-color="white"> <i class="fa-solid fa-tags"></i> <b>All</b></p>
 									<p data-type="Research" data-color="hotpink"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
 									<p data-type="Data Science" data-color="#40E0D0"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
+									<p data-type="Data Viz" data-color="#4C3BCF"> <i class="fa-solid fa-tags"></i> <b>Data Visualization</b></p>
 									<p data-type="UX Design" data-color="#9af9cb"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
 									<p data-type="Writing" data-color="#ffc04c"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
 									<p data-type="Frontend Development" data-color="#cb9af9"> <i class="fa-solid fa-tags"></i> <b>Frontend Dev</b></p>
-									<p data-type="Marketing Content" data-color="#e04050"> <i class="fa-solid fa-tags"></i> <b>Marketing</b></p>
 								</div>
 								
-									
+								<div id="popup-overlay">
+									<div id="popup-message">
+										<span class="wave">👋🏼</span> Looking Forward to Connect!
+									</div>
+								</div>
 
 								<div class="container articles-container">
 									<div class="card" id="anchor2">
