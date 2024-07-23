@@ -78,6 +78,32 @@
 				100% { transform: rotate(0deg); }
 			}
 	
+			#filter-popup {
+				position: absolute;
+				top: 10px; /* Adjust this value to place the popup right below the navbar */
+				left: 10%;
+				transform: translateX(-50%);
+				background-color: rgba(0, 0, 0, 0.8);
+				padding: 0px 20px;
+				border-radius: 5px;
+				color: lightgreen;
+				font-size: 1em;
+				z-index: 1000;
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+			}
+
+			#filter-popup.visible {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			#filter-popup-text i {
+				margin-right: 5px;
+			}
+
+
 			.container {
 				display: flex;
 				justify-content: center;
@@ -105,7 +131,7 @@
 				left: calc(50% - 200px); /* Center horizontally, adjust if image size changes */
 				border-radius: 15px;
 				border: 4px solid #f2f2f2; /* Optional: Adds a border around the image */
-				background-color:#999999;
+				background-color:#bfbfbf;
 				padding: 10px;
 			}
 
@@ -160,7 +186,7 @@
 	
 			.filter-bar {
 				text-align: center;
-				margin-bottom: 20px;
+				margin-bottom: 45px;
 			}
 
 			.filter-bar p {
@@ -348,13 +374,25 @@
 			}, 2000); // Change this value to adjust the duration
 		}
 
-		function filterProjects(type) {
+		
+		function showFilterPopup(color) {
+			const popup = document.getElementById('filter-popup');
+			const popupText = document.getElementById('filter-popup-text');
+			popupText.style.color = color;
+			popup.classList.add('visible');
+
+			setTimeout(() => {
+				popup.classList.remove('visible');
+			}, 2000);
+		}
+
+		function filterProjects(type, color) {
 			const projects = document.querySelectorAll('article.style2');
 			const buttons = document.querySelectorAll('.filter-bar p');
 			const cards = document.querySelectorAll('.card');
 
 			// List of card IDs that should always be visible
-			const alwaysVisibleCardIds = ['anchor2', 'anchor1', ];
+			const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
 
 			// Filter projects
 			projects.forEach(project => {
@@ -387,17 +425,30 @@
 					button.classList.add('active');
 				}
 			});
+
+			// Show filter popup with the color of the active button
+			showFilterPopup(color);
 		}
 
 		document.addEventListener('DOMContentLoaded', () => {
-			filterProjects('all'); // Show all projects by default
+			// Set initial state without showing the popup
+			const projects = document.querySelectorAll('article.style2');
+			const cards = document.querySelectorAll('.card');
+
+			// List of card IDs that should always be visible
+			const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
+
+			// Show all projects and cards by default
+			projects.forEach(project => project.style.display = 'block');
+			cards.forEach(card => card.style.display = 'block');
 
 			// Attach click event listener to each filter button
 			const filterButtons = document.querySelectorAll('.filter-bar p');
 			filterButtons.forEach(button => {
 				button.addEventListener('click', () => {
 					const type = button.getAttribute('data-type');
-					filterProjects(type);
+					const color = button.style.color;
+					filterProjects(type, color);
 				});
 			});
 		});
@@ -421,11 +472,18 @@
 									<li><a href="#anchor1">Education</a></li>
 									<li><a href="#anchor3">Contact</a></li>
 								</ul>
+								<div id="filter-popup" class="hidden">
+									<span id="filter-popup-text"><i class="fa fa-check"></i> Filtered</span>
+								</div>
 							</nav>
 							
 						</div>
+						
 						<div class="pb"></div>	
 					</header>
+
+					<!-- Filter Confirmation Popup -->
+					
 
 				<!-- Main -->
 					<div id="main">
