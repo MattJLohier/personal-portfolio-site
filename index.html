@@ -28,6 +28,21 @@
 		<script src="https://kit.fontawesome.com/2e3355ca3e.js" crossorigin="anonymous"></script>
 
 		<style>
+
+			/* Hide scrollbar for Chrome, Safari, and Opera */
+			/* Hide scrollbar for Chrome, Safari, and Opera */
+			/* Hide scrollbar for Chrome, Safari, and Opera */
+			/* Hide scrollbar for Chrome, Safari, and Opera */
+			html::-webkit-scrollbar {
+				width: 0px;
+			}
+
+			/* Hide scrollbar for IE, Edge, and Firefox */
+			html {
+				-ms-overflow-style: none;  /* IE and Edge */
+				scrollbar-width: none;  /* Firefox */
+			}
+
 			#hidden-content {
 				display: none;
 			}
@@ -51,7 +66,7 @@
 			#popup-message {
 				background: #282828;
 				padding: 2em;
-				border-radius: 10px;;
+				border-radius: 10px;
 				text-align: center;
 				color: white;
 				font-weight: 600;
@@ -59,12 +74,23 @@
 				border: solid;
 				border-color: #9ac8f9;
 				border-width: 4px;
+				animation: none; /* Default to no animation */
+			}
+
+			@keyframes borderFill {
+				0% {
+					border-color: #9ac8f9; /* Initial border color */
+				}
+				100% {
+					border-color: green; /* Final border color */
+				}
 			}
 
 			.wave {
 				display: inline-block;
 				animation: wave-animation 2s infinite;
 				transform-origin: 70% 70%;
+				font-size: 1.5em;
 			}
 
 			@keyframes wave-animation {
@@ -363,17 +389,21 @@
 			const popupMessage = document.getElementById('popup-message');
 			popupOverlay.style.display = 'flex';
 	
+			// Store a flag in sessionStorage
+			sessionStorage.setItem('popupShown', 'true');
+	
+			// Set the popup border color to green 200 milliseconds before redirect
 			setTimeout(() => {
 				popupMessage.style.borderColor = 'green'; // Change the border color to green
 	
-				// Hide the popup right before redirect
-				popupOverlay.style.display = 'none';
-				sessionStorage.removeItem('popupShown'); // Clear the flag
-	
 				setTimeout(() => {
+					// Hide the popup right before redirect
+					popupOverlay.style.display = 'none';
+					sessionStorage.removeItem('popupShown'); // Clear the flag
+	
 					window.location.href = url;
-				}, 100); // Short delay to allow the color change to be visible
-			}, 2000); // Change this value to adjust the duration
+				}, 900); // Delay the redirect by 200 milliseconds to show the green border
+			}, 1400); // Change this value to adjust the total duration before setting the green border
 		}
 	
 		function hidePopup() {
@@ -384,13 +414,19 @@
 			sessionStorage.removeItem('popupShown');
 		}
 	
+		function checkPopupShown() {
+			const urlParams = new URLSearchParams(window.location.search);
+			if (urlParams.get('popupShown') === 'true' || sessionStorage.getItem('popupShown') === 'true') {
+				hidePopup();
+				urlParams.delete('popupShown');
+				const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+				history.replaceState(null, '', newUrl);
+			}
+		}
+	
 		window.onload = function() {
 			checkViewport();
-	
-			// Check sessionStorage and hide the popup if already shown
-			if (sessionStorage.getItem('popupShown') === 'true') {
-				hidePopup();
-			}
+			checkPopupShown();
 		};
 	
 		window.onresize = checkViewport;
