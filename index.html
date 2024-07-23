@@ -371,7 +371,12 @@
 				setTimeout(() => {
 					window.location.href = url;
 				}, 100); // Short delay to allow the color change to be visible
-			}, 2000); // Change this value to adjust the duration
+			}, 1000); // Change this value to adjust the duration
+		}
+	
+		function hidePopup() {
+			const popupOverlay = document.getElementById('popup-overlay');
+			popupOverlay.style.display = 'none';
 		}
 	
 		window.onload = function() {
@@ -379,11 +384,17 @@
 	
 			// Check sessionStorage and hide the popup if already shown
 			if (sessionStorage.getItem('popupShown') === 'true') {
-				document.getElementById('popup-overlay').style.display = 'none';
+				hidePopup();
 			}
 		};
 	
 		window.onresize = checkViewport;
+	
+		window.addEventListener('popstate', function() {
+			// Hide popup when navigating back
+			hidePopup();
+			sessionStorage.removeItem('popupShown');
+		});
 	
 		document.addEventListener('DOMContentLoaded', () => {
 			// Handle smooth scroll and adjust for image offset
