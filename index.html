@@ -360,6 +360,31 @@
 		window.onload = checkViewport;
 		window.onresize = checkViewport;
 	
+		document.addEventListener('DOMContentLoaded', () => {
+			// Handle smooth scroll and adjust for image offset
+			const offset = 170; // Adjust this value to account for the image height
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const targetId = this.getAttribute('href');
+					if (targetId === "#") {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth'
+						});
+					} else {
+						const target = document.querySelector(targetId);
+						if (target) {
+							const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+							window.scrollTo({
+								top: targetPosition,
+								behavior: 'smooth'
+							});
+						}
+					}
+				});
+			});
+		});
 
 		function showPopupAndRedirect(url) {
 			const popupOverlay = document.getElementById('popup-overlay');
