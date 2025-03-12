@@ -1,0 +1,329 @@
+/* Hide scrollbar for Chrome, Safari, and Opera */
+html::-webkit-scrollbar {
+	width: 0px;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+html {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+#hidden-content {
+	display: none;
+}
+#mobile-message {
+	display: none;
+}
+
+/* Popup overlay styling */
+#popup-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#popup-message {
+	background: #282828;
+	padding: 2em;
+	border-radius: 10px;
+	text-align: center;
+	color: white;
+	font-weight: 600;
+	font-size: 1.2em;
+	border: solid;
+	border-color: #9ac8f9;
+	border-width: 4px;
+	animation: none;
+}
+
+@keyframes borderFill {
+	0% { border-color: #9ac8f9; }
+	100% { border-color: green; }
+}
+
+.wave {
+	display: inline-block;
+	animation: wave-animation 2s infinite;
+	transform-origin: 70% 70%;
+	font-size: 1.5em;
+}
+
+@keyframes wave-animation {
+	0% { transform: rotate(0deg); }
+	10% { transform: rotate(14deg); }
+	20% { transform: rotate(-8deg); }
+	30% { transform: rotate(14deg); }
+	40% { transform: rotate(-4deg); }
+	50% { transform: rotate(10deg); }
+	60% { transform: rotate(0deg); }
+	100% { transform: rotate(0deg); }
+}
+
+#filter-popup {
+	position: absolute;
+	top: 10px;
+	left: 3%;
+	transform: translateX(-50%);
+	padding: 0px 20px;
+	border-radius: 5px;
+	color: lightgreen;
+	font-size: 1em;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+}
+
+#filter-popup.visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+#filter-popup-text i {
+	margin-right: 5px;
+}
+
+/* Container and card styles */
+.container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.card {
+	width: 90%;
+	max-width: 90%;
+	background: #636363;
+	padding: 1.5em;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 1em;
+	position: relative;
+	margin-top: 2.5em;
+}
+
+.card-image {
+	width: 400px;
+	height: 100px;
+	overflow: hidden;
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 200px);
+	border-radius: 15px;
+	border: 4px solid #f2f2f2;
+	background-color:#bfbfbf;
+	padding: 10px;
+}
+
+.card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.card-image:hover {
+	transform: scale(0.98);
+}
+
+/* Category, heading, and author styles */
+.category {
+	font-size: 2.4em;
+	font-weight: 600;
+	color: white;
+	padding-left: 22px;
+	margin-top: 1em;
+}
+
+.category:hover {
+	cursor: pointer;
+}
+
+.heading {
+	font-weight: 600;
+	font-size: 1.5em;
+	color: lightgray;
+	padding-left: 22px;
+	margin-top: -12px;
+}
+
+.heading:hover {
+	cursor: pointer;
+}
+
+.author {
+	color: gray;
+	font-weight: 400;
+	font-size: 11px;
+	padding-top: 20px;
+}
+
+.name {
+	font-weight: 600;
+}
+
+.name:hover {
+	cursor: pointer;
+}
+
+/* Filter bar styles */
+.filter-bar {
+	text-align: center;
+	margin-bottom: 45px;
+}
+
+.filter-bar p {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px 10px;
+	border-radius: 15px;
+	background-color: grey;
+	cursor: pointer;
+	font-size: 1em;
+	color: white;
+}
+
+.filter-bar p:hover {
+	background-color: lightgray;
+	color: black;
+}
+
+/* Color styles for filter buttons */
+.filter-bar p[data-color="white"] { color: white; }
+.filter-bar p[data-color="hotpink"] { color: hotpink; }
+.filter-bar p[data-color="#40E0D0"] { color: #40E0D0; }
+.filter-bar p[data-color="#9af9cb"] { color: #9af9cb; }
+.filter-bar p[data-color="#ffc04c"] { color: #ffc04c; }
+.filter-bar p[data-color="#cb9af9"] { color: #cb9af9; }
+.filter-bar p[data-color="#4C3BCF"] { color: #4C3BCF; }
+.filter-bar p[data-color="#f8f99a"] { color: #f8f99a; }
+
+/* Icon color styles for filter buttons */
+.filter-bar p i { margin-right: 5px; }
+.filter-bar p[data-color="white"] i { color: white; }
+.filter-bar p[data-color="hotpink"] i { color: hotpink; }
+.filter-bar p[data-color="#40E0D0"] i { color: #40E0D0; }
+.filter-bar p[data-color="#9af9cb"] i { color: #9af9cb; }
+.filter-bar p[data-color="#ffc04c"] i { color: #ffc04c; }
+.filter-bar p[data-color="#cb9af9"] i { color: #cb9af9; }
+.filter-bar p[data-color="#4C3BCF"] i { color: #4C3BCF; }
+.filter-bar p[data-color="#f8f99a"] i { color: #f8f99a; }
+
+/* Active state styles */
+.filter-bar p.active {
+	background-color: #9ac8f9;
+}
+.filter-bar p.active[data-color="white"] { color: white; }
+.filter-bar p.active[data-color="hotpink"] { color: hotpink; }
+.filter-bar p.active[data-color="#40E0D0"] { color: #40E0D0; }
+.filter-bar p.active[data-color="#9af9cb"] { color: #9af9cb; }
+.filter-bar p.active[data-color="#ffc04c"] { color: #ffc04c; }
+.filter-bar p.active[data-color="#cb9af9"] { color: #cb9af9; }
+.filter-bar p.active i[data-color="white"] { color: white; }
+.filter-bar p.active i[data-color="hotpink"] { color: hotpink; }
+.filter-bar p.active i[data-color="#40E0D0"] { color: #40E0D0; }
+.filter-bar p.active i[data-color="#9af9cb"] { color: #9af9cb; }
+	filter-bar p.active i[data-color="#ffc04c"] { color: #ffc04c; }
+.filter-bar p.active i[data-color="#cb9af9"] { color: #cb9af9; }
+.filter-bar p.active i[data-color="#4C3BCF"] { color: #4C3BCF; }
+.filter-bar p.active i[data-color="#f8f99a"] { color: #f8f99a; }
+
+/* Shake animation */
+@keyframes shake {
+	0% { transform: translate(1px, 1px) rotate(0deg); }
+	10% { transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { transform: translate(-3px, 0px) rotate(1deg); }
+	30% { transform: translate(3px, 2px) rotate(0deg); }
+	40% { transform: translate(1px, -1px) rotate(1deg); }
+	50% { transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { transform: translate(-3px, 1px) rotate(0deg); }
+	70% { transform: translate(3px, 1px) rotate(-1deg); }
+	80% { transform: translate(-1px, -1px) rotate(1deg); }
+	90% { transform: translate(1px, 2px) rotate(0deg); }
+	100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+	animation: shake 0.5s;
+	animation-iteration-count: 1;
+}
+
+/* --- Existing custom CSS remains --- */
+
+/* New styles for private project feedback */
+.private-warning {
+    background-color: red !important;
+    transition: background-color 0.5s;
+  }
+  
+  /* Optional: a default style for the overlay message */
+  .private-message {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+/* Private project overlay for subtle messaging */
+.image {
+    position: relative;
+    z-index: 1; /* Lower z-index so overlay can be higher */
+}
+
+/* Updated overlay for private projects targeting only the image area */
+.private-overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(40, 40, 40, 0.9); /* A dark, subtle overlay */
+    color: #f8f99a;                    /* Accent text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;                /* Ensures multi-line text is centered */
+    font-size: 1.2em;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 9999; /* Very high to ensure it sits on top */
+}
+
+.private-overlay-image {
+    display: flex;
+    flex-direction: column; /* stacks children vertically */
+    align-items: center;    /* optional: centers text horizontally */
+    justify-content: center;/* optional: centers text vertically */
+    white-space: normal;    /* ensures whitespace is rendered normally */
+  }
+  
+  .first-line {
+    font-size: 24px; /* larger text for the first line */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .second-line {
+    font-size: 16px; /* smaller text for the second line */
+    color: lightgray;
+    font-weight: 500;
+  }
+  

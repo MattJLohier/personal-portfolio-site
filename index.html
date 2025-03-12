@@ -2,9 +2,6 @@
 <!--
 	Phantom by HTML5 UP
 	html5up.net | 
-	
-	
-	ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html style="scroll-behavior: smooth; scroll-padding-top:6em;">
@@ -12,1113 +9,666 @@
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-RS58VGWEYB"></script>
 		<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-RS58VGWEYB');
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-RS58VGWEYB');
 		</script>
 
 		<title>Matt Lohier</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<!-- External CSS Files -->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
 		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script src="https://kit.fontawesome.com/2e3355ca3e.js" crossorigin="anonymous"></script>
-
-		<style>
-
-			/* Hide scrollbar for Chrome, Safari, and Opera */
-			/* Hide scrollbar for Chrome, Safari, and Opera */
-			/* Hide scrollbar for Chrome, Safari, and Opera */
-			/* Hide scrollbar for Chrome, Safari, and Opera */
-			html::-webkit-scrollbar {
-				width: 0px;
-			}
-
-			/* Hide scrollbar for IE, Edge, and Firefox */
-			html {
-				-ms-overflow-style: none;  /* IE and Edge */
-				scrollbar-width: none;  /* Firefox */
-			}
-
-			#hidden-content {
-				display: none;
-			}
-			#mobile-message {
-				display: none;
-			}
-
-			#popup-overlay {
-				display: none;
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0, 0, 0, 0.8);
-				justify-content: center;
-				align-items: center;
-				z-index: 1000;
-			}
-
-			#popup-message {
-				background: #282828;
-				padding: 2em;
-				border-radius: 10px;
-				text-align: center;
-				color: white;
-				font-weight: 600;
-				font-size: 1.2em;
-				border: solid;
-				border-color: #9ac8f9;
-				border-width: 4px;
-				animation: none; /* Default to no animation */
-			}
-
-			@keyframes borderFill {
-				0% {
-					border-color: #9ac8f9; /* Initial border color */
-				}
-				100% {
-					border-color: green; /* Final border color */
-				}
-			}
-
-			.wave {
-				display: inline-block;
-				animation: wave-animation 2s infinite;
-				transform-origin: 70% 70%;
-				font-size: 1.5em;
-			}
-
-			@keyframes wave-animation {
-				0% { transform: rotate(0deg); }
-				10% { transform: rotate(14deg); }
-				20% { transform: rotate(-8deg); }
-				30% { transform: rotate(14deg); }
-				40% { transform: rotate(-4deg); }
-				50% { transform: rotate(10deg); }
-				60% { transform: rotate(0deg); }
-				100% { transform: rotate(0deg); }
-			}
-	
-			#filter-popup {
-				position: absolute;
-				top: 10px; /* Adjust this value to place the popup right below the navbar */
-				left: 3%;
-				transform: translateX(-50%);
-				padding: 0px 20px;
-				border-radius: 5px;
-				color: lightgreen;
-				font-size: 1em;
-				z-index: 1000;
-				opacity: 0;
-				visibility: hidden;
-				transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
-			}
-
-			#filter-popup.visible {
-				opacity: 1;
-				visibility: visible;
-			}
-
-			#filter-popup-text i {
-				margin-right: 5px;
-			}
-
-
-			.container {
-				display: flex;
-				justify-content: center;
-				width: 100%;
-			}
-	
-			.card {
-				width: 90%;
-				max-width: 90%;
-				background: #636363;
-				padding: 1.5em;
-				border-radius: 15px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				margin-bottom: 1em;
-				position: relative;
-				margin-top: 2.5em;
-			}
-	
-			.card-image {
-				width: 400px; /* Adjust size as needed */
-				height: 100px; /* Adjust size as needed */
-				overflow: hidden;
-				position: absolute;
-				top: -50px; /* Half of the height to center it vertically */
-				left: calc(50% - 200px); /* Center horizontally, adjust if image size changes */
-				border-radius: 15px;
-				border: 4px solid #f2f2f2; /* Optional: Adds a border around image */
-				background-color:#bfbfbf;
-				padding: 10px;
-			}
-
-			.card-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-	
-			.card-image:hover {
-				transform: scale(0.98);
-			}
-	
-			.category {
-				font-size: 2.4em; /* Adjusted font size */
-				font-weight: 600;
-				color: white;
-				padding-left: 22px;
-				margin-top: 1em;
-			}
-	
-			.category:hover {
-				cursor: pointer;
-			}
-	
-			.heading {
-				font-weight: 600;
-				font-size: 1.5em;
-				color: lightgray;
-				padding-left: 22px;
-				margin-top: -12px;
-			}
-	
-			.heading:hover {
-				cursor: pointer;
-			}
-	
-			.author {
-				color: gray;
-				font-weight: 400;
-				font-size: 11px;
-				padding-top: 20px;
-			}
-	
-			.name {
-				font-weight: 600;
-			}
-	
-			.name:hover {
-				cursor: pointer;
-			}
-	
-			.filter-bar {
-				text-align: center;
-				margin-bottom: 45px;
-			}
-
-			.filter-bar p {
-				display: inline-block;
-				margin: 5px;
-				padding: 5px 10px;
-				border-radius: 15px;
-				background-color: grey; /* Default background color */
-				cursor: pointer;
-				font-size: 1em;
-				color: white; /* Default text color */
-			}
-
-			/* Hover effect */
-			.filter-bar p:hover {
-				background-color: lightgray; /* Change to desired hover background color */
-				color: black; /* Change to desired hover text color */
-			}
-
-			/* Color styles for filter buttons based on data-color attribute */
-			.filter-bar p[data-color="white"] {
-				color: white;
-			}
-
-			.filter-bar p[data-color="hotpink"] {
-				color: hotpink;
-			}
-
-			.filter-bar p[data-color="#40E0D0"] {
-				color: #40E0D0;
-			}
-
-			.filter-bar p[data-color="#9af9cb"] {
-				color: #9af9cb;
-			}
-
-			.filter-bar p[data-color="#ffc04c"] {
-				color: #ffc04c;
-			}
-
-			.filter-bar p[data-color="#cb9af9"] {
-				color: #cb9af9;
-			}
-			.filter-bar p[data-color="#4C3BCF"] {
-				color: #4C3BCF;
-			}
-
-			.filter-bar p[data-color="#f8f99a"] {
-				color: #f8f99a;
-			}
-		
-
-			/* Icon color styles */
-			.filter-bar p i {
-				margin-right: 5px;
-			}
-
-			.filter-bar p[data-color="white"] i {
-				color: white;
-			}
-
-			.filter-bar p[data-color="hotpink"] i {
-				color: hotpink;
-			}
-
-			.filter-bar p[data-color="#40E0D0"] i {
-				color: #40E0D0;
-			}
-
-			.filter-bar p[data-color="#9af9cb"] i {
-				color: #9af9cb;
-			}
-
-			.filter-bar p[data-color="#ffc04c"] i {
-				color: #ffc04c;
-			}
-
-			.filter-bar p[data-color="#cb9af9"] i {
-				color: #cb9af9;
-			}
-
-			.filter-bar p[data-color="#4C3BCF"] i {
-				color: #4C3BCF;
-			}
-
-			.filter-bar p[data-color="#f8f99a"] i {
-				color: #f8f99a;
-			}
-			
-
-			/* Styles for the active class */
-			.filter-bar p.active {
-				background-color: #9ac8f9; /* Background color for active button */
-			}
-
-			/* Ensure active button retains its text and icon color */
-			.filter-bar p.active[data-color="white"] {
-				color: white;
-			}
-
-			.filter-bar p.active[data-color="hotpink"] {
-				color: hotpink;
-			}
-
-			.filter-bar p.active[data-color="#40E0D0"] {
-				color: #40E0D0;
-			}
-
-			.filter-bar p.active[data-color="#9af9cb"] {
-				color: #9af9cb;
-			}
-
-			.filter-bar p.active[data-color="#ffc04c"] {
-				color: #ffc04c;
-			}
-
-			.filter-bar p.active[data-color="#cb9af9"] {
-				color: #cb9af9;
-			}
-
-			.filter-bar p.active i[data-color="white"] {
-				color: white;
-			}
-
-			.filter-bar p.active i[data-color="hotpink"] {
-				color: hotpink;
-			}
-
-			.filter-bar p.active i[data-color="#40E0D0"] {
-				color: #40E0D0;
-			}
-
-			.filter-bar p.active i[data-color="#9af9cb"] {
-				color: #9af9cb;
-			}
-
-			.filter-bar p.active i[data-color="#ffc04c"] {
-				color: #ffc04c;
-			}
-
-			.filter-bar p.active i[data-color="#cb9af9"] {
-				color: #cb9af9;
-			}
-
-			.filter-bar p.active i[data-color="#4C3BCF"] {
-				color: #4C3BCF;
-			}
-
-			.filter-bar p.active i[data-color="#cb9af9"] {
-				color: #cb9af9;
-			}
-
-			.filter-bar p.active i[data-color="#f8f99a"] {
-				color: #f8f99a;
-			}
-
-			
-
-		</style>
-	
-	<script>
-		function checkViewport() {
-			if (window.innerWidth < 768) {
-				document.getElementById('hidden-content').style.display = 'none';
-				document.getElementById('mobile-message').style.display = 'block';
-			} else {
-				document.getElementById('hidden-content').style.display = 'block';
-				document.getElementById('mobile-message').style.display = 'none';
-			}
-		}
-	
-		function showPopupAndRedirect(url) {
-			const popupOverlay = document.getElementById('popup-overlay');
-			const popupMessage = document.getElementById('popup-message');
-			popupOverlay.style.display = 'flex';
-	
-			// Store a flag in sessionStorage
-			sessionStorage.setItem('popupShown', 'true');
-	
-			// Set the popup border color to green 200 milliseconds before redirect
-			setTimeout(() => {
-				popupMessage.style.borderColor = 'green'; // Change the border color to green
-	
-				setTimeout(() => {
-					// Hide the popup right before redirect
-					popupOverlay.style.display = 'none';
-					sessionStorage.removeItem('popupShown'); // Clear the flag
-	
-					window.location.href = url;
-				}, 900); // Delay the redirect by 200 milliseconds to show the green border
-			}, 1400); // Change this value to adjust the total duration before setting the green border
-		}
-	
-		function hidePopup() {
-			const popupOverlay = document.getElementById('popup-overlay');
-			popupOverlay.style.display = 'none';
-	
-			// Clear the flag in sessionStorage
-			sessionStorage.removeItem('popupShown');
-		}
-	
-		function checkPopupShown() {
-			const urlParams = new URLSearchParams(window.location.search);
-			if (urlParams.get('popupShown') === 'true' || sessionStorage.getItem('popupShown') === 'true') {
-				hidePopup();
-				urlParams.delete('popupShown');
-				const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
-				history.replaceState(null, '', newUrl);
-			}
-		}
-	
-		window.onload = function() {
-			checkViewport();
-			checkPopupShown();
-		};
-	
-		window.onresize = checkViewport;
-	
-		document.addEventListener('DOMContentLoaded', () => {
-			// Handle smooth scroll and adjust for image offset
-			const offset = 170; // Adjust this value to account for the image height
-			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-				anchor.addEventListener('click', function (e) {
-					e.preventDefault();
-					const targetId = this.getAttribute('href');
-					if (targetId === "#") {
-						window.scrollTo({
-							top: 0,
-							behavior: 'smooth'
-						});
-					} else {
-						const target = document.querySelector(targetId);
-						if (target) {
-							const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-							window.scrollTo({
-								top: targetPosition,
-								behavior: 'smooth'
-							});
-						}
-					}
-				});
-			});
-			
-			// Set initial state without showing the popup
-			const projects = document.querySelectorAll('article.style2');
-			const cards = document.querySelectorAll('.card');
-	
-			// List of card IDs that should always be visible
-			const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
-	
-			// Show all projects and cards by default
-			projects.forEach(project => project.style.display = 'block');
-			cards.forEach(card => card.style.display = 'block');
-	
-			// Attach click event listener to each filter button
-			const filterButtons = document.querySelectorAll('.filter-bar p');
-			filterButtons.forEach(button => {
-				button.addEventListener('click', () => {
-					const type = button.getAttribute('data-type');
-					const color = button.style.color;
-					filterProjects(type, color);
-				});
-			});
-		});
-	
-		function showFilterPopup(color) {
-			const popup = document.getElementById('filter-popup');
-			const popupText = document.getElementById('filter-popup-text');
-			popupText.style.color = color;
-			popup.classList.add('visible');
-	
-			setTimeout(() => {
-				popup.classList.remove('visible');
-			}, 800);
-		}
-	
-		function filterProjects(type, color) {
-			const projects = document.querySelectorAll('article.style2');
-			const buttons = document.querySelectorAll('.filter-bar p');
-			const cards = document.querySelectorAll('.card');
-	
-			// List of card IDs that should always be visible
-			const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
-	
-			// Filter projects
-			projects.forEach(project => {
-				const projectType = project.getAttribute('data-type') || ''; // Provide a default empty string if null
-				if (type === 'all' || projectType.includes(type)) {
-					project.style.display = 'block';
-				} else {
-					project.style.display = 'none';
-				}
-			});
-	
-			// Filter cards
-			cards.forEach(card => {
-				const cardType = card.getAttribute('data-type') || ''; // Provide a default empty string if null
-				if (alwaysVisibleCardIds.includes(card.id) || type === 'all' || cardType.includes(type)) {
-					card.style.display = 'block';
-				} else {
-					card.style.display = 'none';
-				}
-			});
-	
-			// Clear 'active' class from all buttons
-			buttons.forEach(button => {
-				button.classList.remove('active');
-			});
-	
-			// Add 'active' class to the clicked button
-			buttons.forEach(button => {
-				if (button.getAttribute('data-type') === type) {
-					button.classList.add('active');
-				}
-			});
-	
-			// Show filter popup with the color of the active button
-			showFilterPopup(color);
-		}
-	</script>
-	
-
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
-			<div id="wrapper" style="background-image: url(pixel_weave.png)">
+		<div id="wrapper" style="background-image: url(pixel_weave.png)">
 
-				<!-- Header -->
-					<header id="header" style="background-color: #282828;">
-						<div class="inner" >
-							<!-- Logo -->
-							<!-- Nav -->
-							<nav id="nav">
-								<ul class="container">
-									<li><a href="#">Home</a></li>
-									<li><a href="#anchor2">Work Experience</a></li>
-									<li><a href="#anchor1">Education</a></li>
-									<li><a href="#anchor3">Contact</a></li>
-								</ul>
-								<div id="filter-popup" class="hidden">
-									<span id="filter-popup-text"><i class="fa fa-check"></i> Filtered</span>
-								</div>
-							</nav>
-							
+			<!-- Header -->
+			<header id="header" style="background-color: #282828;">
+				<div class="inner">
+					<!-- Logo -->
+					<!-- Nav -->
+					<nav id="nav">
+						<ul class="container">
+							<li><a href="#">Home</a></li>
+							<li><a href="#anchor2">Work Experience</a></li>
+							<li><a href="#anchor1">Education</a></li>
+							<li><a href="#anchor3">Contact</a></li>
+						</ul>
+						<div id="filter-popup" class="hidden">
+							<span id="filter-popup-text"><i class="fa fa-check"></i> Filtered</span>
 						</div>
-						
-						<div class="pb"></div>	
+					</nav>
+				</div>
+				<div class="pb"></div>
+			</header>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+					<header style="margin-top:2em;">
+						<span class="symbol" style="display: flex; flex-direction: column; justify-content: center; flex-wrap: wrap; align-items: center;">
+							<img class="img2" src="images/pic16.jpg" alt="" />
+							<h1 style="margin-bottom: 0.25em;">Matt Lohier</h1>
+							<div style="margin-bottom:1em;">Welcome to my Portfolio</div>
+							<a class="button primary" href="javascript:void(0);" onclick="gtag('event', 'Resume Click', {'event_category': 'Button', 'event_label': 'Resume Download'}); showPopupAndRedirect('assets/files/resume-matt-lohier.pdf');">Resume</a>
+						</span>
+						<br /><br />
 					</header>
 
-					<!-- Filter Confirmation Popup -->
-					
-
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<header style="margin-top:2em;">
-								<span class="symbol" style=" flex-direction: column; display: flex; justify-content: center; flex-wrap: wrap; align-items: center;">
-									<img class="img2" src="images/pic16.jpg" alt="" /> <h1 style="margin-bottom: 0.25em;">Matt Lohier</h1>
-									<div style="margin-bottom:1em;">Welcome to my Portfolio</div>
-									<a class="button primary" href="javascript:void(0);" onclick="gtag('event', 'Resume Click', {'event_category': 'Button', 'event_label': 'Resume Download'}); showPopupAndRedirect('assets/files/resume-matt-lohier.pdf');">Resume</a>
-								</span>
-								
-								<br />
-								<br />
-							</header>
-
-							<!-- Mobile Message -->
-							<div id="mobile-message" style="text-align: center; padding: 2em;">
-								<i class="fa-solid fa-mobile-screen-button"></i> <h2>Looks like you are using a mobile device!</h2>
-								<p>To get a detailed look at my 20+ projects, please visit this site on a larger screen </p>
-							</div>
-
-							<div id="popup-overlay">
-								<div id="popup-message">
-									<span class="wave">👋🏼</span> Looking Forward to Connecting!
-								</div>
-							</div>
-								
-							<div id="hidden-content">
-
-								<div class="filter-bar">
-									<p data-type="all" data-color="white" class="active"> <i class="fa-solid fa-tags"></i> <b>All</b></p>
-									<p data-type="Research" data-color="hotpink"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-									<p data-type="Data Science" data-color="#40E0D0"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-									<p data-type="Data Viz" data-color="#4C3BCF"> <i class="fa-solid fa-tags"></i> <b>Data Visualization</b></p>
-									<p data-type="UX Design" data-color="#9af9cb"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-									<p data-type="Writing" data-color="#ffc04c"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
-									<p data-type="Frontend Development" data-color="#cb9af9"> <i class="fa-solid fa-tags"></i> <b>Frontend Dev</b></p>
-								</div>
-								
-								<div class="container articles-container">
-									<div class="card" id="anchor2">
-										<div class="card-image">
-											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/circana-logo.png" alt="Circana Logo" />
-										</div>
-										<div class="category">Circana - Competitive Intelligence Analyst</div>
-										<div class="heading">September 2024 - Present
-										</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;"> Circana is a leading provider of integrated market intelligence and analytics solutions. In my role as a Competitive Intelligence Analyst, I specialize in tracking competitor activities, analyzing market trends, automating data collection processes, and delivering actionable insights to support Circana's strategic initiatives. </p>
-										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;"> <i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #4C3BCF;"> <i class="fa-solid fa-tags"></i> <b>Data Visualization</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-										</div>
-									</div>
-								</div>
-
-								<section class="tiles" style="scroll-behavior: smooth; margin:0;">
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/media-1.png" alt="" />
-										</span>
-										<a href="private.html">
-											<h2>Competitor Media Scraping</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>Circana</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Daily scraping of competitor media content including press releases, news announcements, and LinkedIn content integrated into a live web app </p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/jobs.png" alt="" />
-										</span>
-										<a href="private.html">
-											<h2>Competitor Hiring Tracker</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "><i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>Circana</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Automated tracking of competitor job postings with live statistics generation, integrated into a live web app </p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/claims.png" alt="" />
-										</span>
-										<a href="private.html">
-											<h2>Competitor Claims Extractor</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4> Circana </h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> A flexible AI-powered framework designed to efficiently identify key competitor claims, UVPs, and other insights from large volumes of competitor web pages </p>
-									</article>
-								</section>
-
-								<div class="container articles-container">
-									<div class="card" id="anchor2">
-										<div class="card-image">
-											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/ob_logo.png" alt="OpenBrand Logo" />
-										</div>
-										<div class="category">OpenBrand - Analyst</div>
-										<div class="heading">March 2023 - September 2024
-										</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;">OpenBrand is a real-time market intelligence platform for brands to leverage data and AI-driven insights. As the Analyst overseeing market intelligence offerings for the MFP copier category, I specialize in providing competitive intelligence, customized consulting projects, data analysis and trending, and industry reporting on the MFP/Copier market.</p>
-										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;"> <i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #4C3BCF;"> <i class="fa-solid fa-tags"></i> <b>Data Visualization</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-										</div>
-									</div>
-								</div>
-								
-								
-								<section class="tiles" style="scroll-behavior: smooth; margin:0;">
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/mir.PNG" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Weekly Market Intelligence Reports</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Weekly reports sent to <b>2000+ clients</b> detailing product launches, mergers and acquisitions, quarterly financial results, pricing activity, and emerging trends </p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/asv.PNG" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Weekly Analyst Spotlight Videos</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "><i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Short 1-2 minute videos highlighting key trends and news, with more detailed coverage provided in my Market Intelligence Reports</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/qsum.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Quarterly Recaps</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4> OpenBrand </h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Quarterly reports highlighting major industry and channel events, hardware launches, and M&A activity, with links to our original coverage</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/deepdive.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Quarterly Deep Dives</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4> OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Longer form research papers that delve deeper into key industry trends </p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/qs.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Quicksight Dashboards & Integration</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> My work setting up the MFP Copiers category in the new OpenBrand App</p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/scooper-portfolio.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Scooper - Certification Scraping </h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"><i>Scooper</i>, a Python tool that scrapes product certifications and placements</p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/scrapegraph.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>ScrapeGraphAI Industry News Scraper</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin: 1em; text-align: center; margin-top: 2em;"> My work with Python and SrapeGraphAI to easily find, search, and classify new MFP Copier related news </p>
-									</article>
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/dealerlocation.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Dealer Location Scraper Project</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> My work scraping dealer location portals to reverse engineer a map of office equipment dealers in the US </p>
-									</article> 
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/consulting.png" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>Consulting Projects</h2>
-											<br />
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>OpenBrand</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Examples of custom consulting projects and other client requests </p>
-									</article>
-								</section>	
-											
-
-								<div class="container articles-container">
-									<div class="card" id="anchor2" data-type="Technical Documentation Frontend Development Marketing Content">
-										<div class="card-image">
-											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/modalai2.png" alt="OpenBrand Logo" />
-										</div>
-										<div class="category" style="font-size: 1.6em;"> ModalAI - Technical Documentation and Product Marketing Intern</div>
-										<div class="heading">Jun 2021 - Dec 2022
-										</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;">At ModalAI, I contributed to advancing robot and drone technology by creating and maintaining user-centered product documentation and marketing content. I was responsible for over 100 pages of customer-facing documentation, ensuring updates for product releases and specifications. I led a website theme refresh for improved aesthetics and usability using JS/SCSS. Additionally, I produced a video for the AUVSI awards and half a dozen customer-facing video tutorials.</p>
-										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #f8f99a;"> <i style="color: #f8f99a;" class="fa-solid fa-tags"></i> <b>Technical Documentation</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;"> <i class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #e04050;"> <i class="fa-solid fa-tags"></i> <b>Marketing Content</b></p>
-										</div>
-									</div>
-								</div>	
-								<section class="tiles" style="scroll-behavior: smooth; margin:0;">	
-									<article class="style2" data-type="Technical Documentation">
-										<span class="image">
-											<img src="images/quickstart.png" alt="" />
-										</span>
-										<a href="page10.html">
-											<h2>Product Videos and Tutorials</h2>
-											<p style="text-align: center; margin-top: 2em; color: #f8f99a; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Technical Documentation</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align:center; margin-top: 1em;">See my Quickstart and Tutorial Videos for ModalAI Products which gave gotten <b> over 12,000</b> views on the official ModalAI youtube</p>
-									</article>
-									<article class="style2" data-type="Frontend Development">
-										<span class="image">
-											<img src="images/modalai-redesign.png" alt="" />
-										</span>
-										<a href="page11.html">
-											<h2>Technical Docs Redesign</h2>
-											<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align: center; margin-top: 1em;">My work redesigning the component library of ModalAI's technical site</p>
-									</article>
-									<article class="style2" data-type="Technical Documentation">
-										<span class="image">
-											<img src="images/guides.png" alt="" />
-										</span>
-										<a href="page12.html">
-											<h2>Product Guides</h2>
-											<p style="text-align: center; margin-top: 2em; color: #f8f99a; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Technical Documentation</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align:center; margin-top: 1em;"> My work updating ModalAI's technical documentation site</p>
-									</article>
-									<article class="style2" data-type="Marketing Content">
-										<span class="image">
-											<img src="images/market.png" alt="" />
-										</span>
-										<a href="page13.html">
-											<h2>AUVSI Marketing Video</h2>
-											<p style="text-align: center; margin-top: 2em; color: #e04050; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Marketing Content</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align: center; margin-top: 1em;">Short promotional video submitted to AUVSI awards featuring ModalAI's new VOXL2</p>
-									</article>
-								</section>	
-
-								<div class="container articles-container">
-									<div class="card" id="anchor1" data-type="Education">
-										<div class="card-image">
-											<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/ucsd-logo.png" alt="UCSD Logo" />
-										</div>
-										<div class="category" style="font-size: 1.6em;"> B.S. Cognitive Science with Specialization in Human Computer Interaction</div>
-										<div class="heading">Sept 2018 - Sept 2022
-										</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;">Cognitive Science is an Interdisiplinary focus on neuroscience, computer science, linguistics, and philosophy. My specialization in HCI covers all aspects of the UX design process and gives me a strong background in UI Design, Frontend programming, Usability Analysis, and other Research/Analytical Roles. </p>
-										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;"> <i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #9af9cb;"> <i style="color: #9af9cb;" class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #ffc04c;"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
-										</div>
-									</div>
-								</div>	
-
-								<section class="tiles" style="scroll-behavior: smooth; margin:0;"> 
-									<!--<div id="anchor1" style="color: #636363; border-radius: 15px; text-align: -webkit-center; margin-left: 2.5em; display: flex; flex-direction: column;">
-										<div style="display: flex; justify-content: center; ">
-											<img class="img3" src="images/ucsd-logo2.png" alt="" />
-											<h2 style="align-self: center; width: 40%; text-transform: none; color: #636363; letter-spacing: 0; margin: 0; text-decoration: underline; text-decoration-color: #9ac8f9"> B.S. Cognitive Science with Specialization in Human Computer Interaction </h2>
-										</div>
-										<div style="display:flex; justify-content: center; flex-direction: column;">
-											<h2 style="letter-spacing: 0; color: #636363; margin-bottom: 0.5em; text-transform: none; "> Sept 2018 - Sept 2022 </h2>
-											<p style="width: 70%; align-self: center; color: #636363; margin-bottom: 1em; ">Cognitive Science is an Interdisiplinary focus on neuroscience, computer science, linguistics, and philosophy. My specialization in HCI covers all aspects of the UX design process and gives me a strong background in UI Design, Front-end programming, Usability Analysis, and other Research/Analytical Roles.   </p>
-											<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9;">
-												<p style="text-align: center; margin-top: 0em; color: hotpink; padding: 0.5em; border-radius: 15px; "> <i style="color:hotpink;" class=" fa-solid fa-tags"></i> <b>Research</b></p>
-												<p style="text-align: center; margin-top: 0em; color: #9af9cb; padding: 0.5em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-												<p style="text-align: center; margin-top: 0em; padding: 0.5em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-												<p style="text-align: center; margin-top: 0em; color: #f9cb9a; padding: 0.5em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
-											</div>
-										</div>
-									</div>-->
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/108.png" alt="" />
-										</span>
-										<a href="page1.html">
-											<h2>Divorce Rates and Economic Conditions</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												<h4>COGS 108 Wi '22</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Python Pandas Data science project comparing economic conditions to divorce rates </p>
-									</article>
-									<article class="style2" data-type="Writing">
-										<span class="image">
-											<img src="images/writing.png" alt="" />
-										</span>
-										<a href="page2.html">
-											<h2>Electoral College Opinion Writing Sample</h2>
-											<p style="text-align: center; margin-top: 2em; color: #ffc04c; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "><i class="fa-solid fa-tags"></i> <b>Writing</b></p>
-											<div class="content">
-												<h4>submitted to UCSD's the guardian, Wi' 21</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Short paper about the history of the electoral college and its current impact on American democracy</p>
-									</article>
-									<article class="style2" data-type="UX Design">
-										<span class="image">
-											<img src="images/firstrepubic.png" alt="" />
-										</span>
-										<a href="page3.html">
-											<h2>First Republic Mobile Redesign</h2>
-											<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-											<div class="content">
-												<h4> COGS 187A Fall '21 </h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Quarter long project redesigning First Republic Bank's online mobile experience</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/142-study-proposal.png" alt="" />
-										</span>
-										<a href="page4.html">
-											<h2>Scent Marking Study Proposal</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4> COGS 142 Spring '22</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Research Proposal for a Study that evaluates the effects of socialization on scent marking behaviors in domestic dogs</p>
-									</article>
-									<article class="style2" data-type="UX Design">
-										<span class="image">
-											<img src="images/spa.png" alt="" />
-										</span>
-										<a href="page5.html">
-											<h2>Spa de Esperanza Online Redesign</h2>
-											<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-											<div class="content">
-												<h4>COGS 187B Wi '22</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> 10 Week Website Redesign for our Client Spa De Esperanza's' online experience</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/diamond-hands.png" alt="" />
-										</span>
-										<a href="page6.html">
-											<h2>Gamestop Price Action Short Documentary</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>MMART 122 Wi' 21'</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> A short documentary video about Gamestop's price movements and its connection to Reddit's WallStreetBets</p>
-									</article>
-									<article class="style2" data-type="UX Design">
-										<span class="image">
-											<img src="images/enrolled.png" alt="" />
-										</span>
-										<a href="page7.html">
-											<h2>"Enrolled" Social Computing Space</h2>
-											<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
-											<div class="content">
-												<h4>COGS 123 Spring' 22</h4>
-											</div>
-										</a>
-										<p style="margin: 1em; text-align: center; margin-top: 2em;"> <i> Enrolled</i>: A 10 Week Project designing, prototyping, and user testing a novel social computing space</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/aphasia.png" alt="" />
-										</span>
-										<a href="page8.html">
-											<h2>Ahpasia Research Study Proposal</h2>
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>COGS 13 Wi' 21</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> 10 Page Research Proposal for a study on selective speech recovery in Bilinguals</p>
-									</article>
-									<article class="style2" data-type="Research">
-										<span class="image">
-											<img src="images/mcwp.png" alt="" />
-										</span>
-										<a href="page9.html">
-											<h2>Portrayals of PTSD </h2>
-											<br />
-											<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
-											<div class="content">
-												<h4>MCWP 50 Wi 22'</h4>
-											</div>
-										</a>
-										<p style="margin:1em; text-align: center;"> Multisource research essay on the portrayals of PTSD in pop culture and in the film American Sniper</p>
-									</article>
-								</section>
-								
-								
-								<div class="container articles-container">
-									<div class="card" id="anchor2" data-type="Personal">
-										
-										<div class="category" style="font-size: 1.6em;"> Personal Projects</div>
-										<p style="padding: 22px; color: white; padding: 0px 22px 0px 22px; margin-bottom: 15px;"> Personal Projects and Other Consulting Work </p>
-										<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;"> <i style="color: #40E0D0;" class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<p style="text-align: center; margin-bottom: 5px; margin-top: 0; padding: 5px 10px 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;"> <i style="color: #cb9af9;" class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
-										</div>
-									</div>
-								</div>
-
-								<section class="tiles" style="scroll-behavior: smooth; margin:0;"> 	
-									<article class="style2" data-type="Data Science">
-										<span class="image">
-											<img src="images/pandas.JPG" alt="" />
-										</span>
-										<a href="page14.html">
-											<h2>Pandas Lyric Location Analyzer</h2>
-											<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align: center; margin-top: 1em;"> What locations does your favorite artist sing about the most? Time to find out!</p>
-									</article>
-									<article class="style2" data-type="Frontend Development">
-										<span class="image">
-											<img src="images/opal.JPG" alt="" />
-										</span>
-										<a href="page15.html">
-											<h2>Opal Aero Consulting</h2>
-											<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;"> <i class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align: center; margin-top: 1em;"> My consulting work seting up brand prescence for an upcoming aviation maintenance firm</p>
-									</article>
-									<article class="style2" data-type="Frontend Development">
-										<span class="image">
-											<img src="images/mysite.JPG" alt="" />
-										</span>
-										<a href="generic.html">
-											<h2>My Portfolio Site</h2>
-											<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px; "> <i class="fa-solid fa-tags"></i> <b>Frontend Development</b></p>
-											<div class="content">
-												</div>
-										</a>
-										<p style="text-align: center; margin-top: 1em;"> Motivations and work behind this portfolio site and other versions of it</p>
-									</article>
-								</section>
-							</div>	
-						</div>
+					<!-- Mobile Message -->
+					<div id="mobile-message" style="text-align: center; padding: 2em;">
+						<i class="fa-solid fa-mobile-screen-button"></i>
+						<h2>Looks like you are using a mobile device!</h2>
+						<p>To get a detailed look at my 20+ projects, please visit this site on a larger screen</p>
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section id="anchor3">
-								<h2 style="color: white;">Get in touch</h2>
-								<form method="post" action="https://formspree.io/f/xlevolyb">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2 style="color: white;">Contact</h2>
-								<ul class="icons">
-									<li><a href="https://www.linkedin.com/in/matt-lohier/" class="icon brands style2 fa-linkedin"><span class="label">Linkedin</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
+					<div id="popup-overlay">
+						<div id="popup-message">
+							<span class="wave">👋🏼</span> Looking Forward to Connecting!
 						</div>
-					</footer>
+					</div>
+						
+					<div id="hidden-content">
 
+						<div class="filter-bar">
+							<p data-type="all" data-color="white" class="active"> <i class="fa-solid fa-tags"></i> <b>All</b></p>
+							<p data-type="Research" data-color="hotpink"> <i class="fa-solid fa-tags"></i> <b>Research</b></p>
+							<p data-type="Data Science" data-color="#40E0D0"> <i class="fa-solid fa-tags"></i> <b>Data Science</b></p>
+							<p data-type="Data Viz" data-color="#4C3BCF"> <i class="fa-solid fa-tags"></i> <b>Data Visualization</b></p>
+							<p data-type="UX Design" data-color="#9af9cb"> <i class="fa-solid fa-tags"></i> <b>UX Design</b></p>
+							<p data-type="Writing" data-color="#ffc04c"> <i class="fa-solid fa-tags"></i> <b>Writing</b></p>
+							<p data-type="Frontend Development" data-color="#cb9af9"> <i class="fa-solid fa-tags"></i> <b>Frontend Dev</b></p>
+						</div>
+						
+						<div class="container articles-container">
+							<div class="card" id="anchor2">
+								<div class="card-image">
+									<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/circana-logo.png" alt="Circana Logo" />
+								</div>
+								<div class="category">Circana - Competitive Intelligence Analyst</div>
+								<div class="heading">September 2024 - Present</div>
+								<p style="padding: 22px; color: white; padding: 0 22px 0 22px; margin-bottom: 15px;">
+									Circana is a leading provider of integrated market intelligence and analytics solutions. In my role as a Competitive Intelligence Analyst, I specialize in tracking competitor activities, analyzing market trends, automating data collection processes, and delivering actionable insights to support Circana's strategic initiatives.
+								</p>
+								<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;">
+										<i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #4C3BCF;">
+										<i class="fa-solid fa-tags"></i> <b>Data Visualization</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<section class="tiles" style="scroll-behavior: smooth; margin:0;">
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/media-1.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Competitor Media Scraping</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>Circana</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Daily scraping of competitor media content including press releases, news announcements, and LinkedIn content integrated into a live web app</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/jobs.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Competitor Hiring Tracker</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>Circana</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Automated tracking of competitor job postings with live statistics generation, integrated into a live web app</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/claims.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Competitor Claims Extractor</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>Circana</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">A flexible AI-powered framework designed to efficiently identify key competitor claims, UVPs, and other insights from large volumes of competitor web pages</p>
+							</article>
+						</section>
+
+						<div class="container articles-container">
+							<div class="card" id="anchor2">
+								<div class="card-image">
+									<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/ob_logo.png" alt="OpenBrand Logo" />
+								</div>
+								<div class="category">OpenBrand - Analyst</div>
+								<div class="heading">March 2023 - September 2024</div>
+								<p style="padding: 22px; color: white; padding: 0 22px 0 22px; margin-bottom: 15px;">
+									OpenBrand is a real-time market intelligence platform for brands to leverage data and AI-driven insights. As the Analyst overseeing market intelligence offerings for the MFP copier category, I specialize in providing competitive intelligence, customized consulting projects, data analysis and trending, and industry reporting on the MFP/Copier market.
+								</p>
+								<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;">
+										<i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #4C3BCF;">
+										<i class="fa-solid fa-tags"></i> <b>Data Visualization</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+								</div>
+							</div>
+						</div>
+						
+						<section class="tiles" style="scroll-behavior: smooth; margin:0;">
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/mir.PNG" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Weekly Market Intelligence Reports</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Weekly reports sent to <b>2000+ clients</b> detailing product launches, mergers and acquisitions, quarterly financial results, pricing activity, and emerging trends</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/asv.PNG" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Weekly Analyst Spotlight Videos</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Short 1-2 minute videos highlighting key trends and news, with more detailed coverage provided in my Market Intelligence Reports</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/qsum.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Quarterly Recaps</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Quarterly reports highlighting major industry and channel events, hardware launches, and M&A activity, with links to our original coverage</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/deepdive.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Quarterly Deep Dives</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Longer form research papers that delve deeper into key industry trends</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/qs.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Quicksight Dashboards & Integration</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">My work setting up the MFP Copiers category in the new OpenBrand App</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/scooper-portfolio.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Scooper - Certification Scraping</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;"><i>Scooper</i>, a Python tool that scrapes product certifications and placements</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/scrapegraph.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>ScrapeGraphAI Industry News Scraper</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin: 1em; text-align: center;">My work with Python and SrapeGraphAI to easily find, search, and classify new MFP Copier related news</p>
+							</article>
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/dealerlocation.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Dealer Location Scraper Project</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">My work scraping dealer location portals to reverse engineer a map of office equipment dealers in the US</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/consulting.png" alt="" />
+								</span>
+								<a href="private.html" class="private-project">
+									<h2>Consulting Projects</h2>
+									<br />
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>OpenBrand</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Examples of custom consulting projects and other client requests</p>
+							</article>
+						</section>
+
+						<div class="container articles-container">
+							<div class="card" id="anchor2" data-type="Technical Documentation Frontend Development Marketing Content">
+								<div class="card-image">
+									<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/modalai2.png" alt="OpenBrand Logo" />
+								</div>
+								<div class="category" style="font-size: 1.6em;">ModalAI - Technical Documentation and Product Marketing Intern</div>
+								<div class="heading">Jun 2021 - Dec 2022</div>
+								<p style="padding: 22px; color: white; padding: 0 22px 0 22px; margin-bottom: 15px;">
+									At ModalAI, I contributed to advancing robot and drone technology by creating and maintaining user-centered product documentation and marketing content. I was responsible for over 100 pages of customer-facing documentation, ensuring updates for product releases and specifications. I led a website theme refresh for improved aesthetics and usability using JS/SCSS. Additionally, I produced a video for the AUVSI awards and half a dozen customer-facing video tutorials.
+								</p>
+								<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #f8f99a;">
+										<i style="color: #f8f99a;" class="fa-solid fa-tags"></i> <b>Technical Documentation</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;">
+										<i class="fa-solid fa-tags"></i> <b>Frontend Development</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #e04050;">
+										<i class="fa-solid fa-tags"></i> <b>Marketing Content</b>
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<section class="tiles" style="scroll-behavior: smooth; margin:0;">
+							<article class="style2" data-type="Technical Documentation">
+								<span class="image">
+									<img src="images/quickstart.png" alt="" />
+								</span>
+								<a href="page10.html">
+									<h2>Product Videos and Tutorials</h2>
+									<p style="text-align: center; margin-top: 2em; color: #f8f99a; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Technical Documentation</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align:center; margin-top: 1em;">See my Quickstart and Tutorial Videos for ModalAI Products which have gotten <b>over 12,000</b> views on the official ModalAI YouTube</p>
+							</article>
+							<article class="style2" data-type="Frontend Development">
+								<span class="image">
+									<img src="images/modalai-redesign.png" alt="" />
+								</span>
+								<a href="page11.html">
+									<h2>Technical Docs Redesign</h2>
+									<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Frontend Development</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align: center; margin-top: 1em;">My work redesigning the component library of ModalAI's technical site</p>
+							</article>
+							<article class="style2" data-type="Technical Documentation">
+								<span class="image">
+									<img src="images/guides.png" alt="" />
+								</span>
+								<a href="page12.html">
+									<h2>Product Guides</h2>
+									<p style="text-align: center; margin-top: 2em; color: #f8f99a; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Technical Documentation</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align:center; margin-top: 1em;">My work updating ModalAI's technical documentation site</p>
+							</article>
+							<article class="style2" data-type="Marketing Content">
+								<span class="image">
+									<img src="images/market.png" alt="" />
+								</span>
+								<a href="page13.html">
+									<h2>AUVSI Marketing Video</h2>
+									<p style="text-align: center; margin-top: 2em; color: #e04050; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Marketing Content</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align: center; margin-top: 1em;">Short promotional video submitted to AUVSI awards featuring ModalAI's new VOXL2</p>
+							</article>
+						</section>
+
+						<div class="container articles-container">
+							<div class="card" id="anchor1" data-type="Education">
+								<div class="card-image">
+									<img style="width: 100%; height: 100%; border-radius: 6px 6px 0 0;" src="images/ucsd-logo.png" alt="UCSD Logo" />
+								</div>
+								<div class="category" style="font-size: 1.6em;">B.S. Cognitive Science with Specialization in Human Computer Interaction</div>
+								<div class="heading">Sept 2018 - Sept 2022</div>
+								<p style="padding: 22px; color: white; padding: 0 22px 0 22px; margin-bottom: 15px;">
+									Cognitive Science is an interdisciplinary focus on neuroscience, computer science, linguistics, and philosophy. My specialization in HCI covers all aspects of the UX design process and gives me a strong background in UI Design, Frontend programming, Usability Analysis, and other Research/Analytical Roles.
+								</p>
+								<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: hotpink;">
+										<i style="color: hotpink;" class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #9af9cb;">
+										<i style="color: #9af9cb;" class="fa-solid fa-tags"></i> <b>UX Design</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #ffc04c;">
+										<i class="fa-solid fa-tags"></i> <b>Writing</b>
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<section class="tiles" style="scroll-behavior: smooth; margin:0;">
+							<!-- Example Tile for a public project -->
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/108.png" alt="" />
+								</span>
+								<a href="page1.html">
+									<h2>Divorce Rates and Economic Conditions</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content">
+										<h4>COGS 108 Wi '22</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Python Pandas data science project comparing economic conditions to divorce rates</p>
+							</article>
+							<article class="style2" data-type="Writing">
+								<span class="image">
+									<img src="images/writing.png" alt="" />
+								</span>
+								<a href="page2.html">
+									<h2>Electoral College Opinion Writing Sample</h2>
+									<p style="text-align: center; margin-top: 2em; color: #ffc04c; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Writing</b>
+									</p>
+									<div class="content">
+										<h4>Submitted to UCSD's the guardian, Wi' 21</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Short paper about the history of the electoral college and its current impact on American democracy</p>
+							</article>
+							<article class="style2" data-type="UX Design">
+								<span class="image">
+									<img src="images/firstrepubic.png" alt="" />
+								</span>
+								<a href="page3.html">
+									<h2>First Republic Mobile Redesign</h2>
+									<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>UX Design</b>
+									</p>
+									<div class="content">
+										<h4>COGS 187A Fall '21</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Quarter-long project redesigning First Republic Bank's online mobile experience</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/142-study-proposal.png" alt="" />
+								</span>
+								<a href="page4.html">
+									<h2>Scent Marking Study Proposal</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>COGS 142 Spring '22</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Research proposal evaluating the effects of socialization on scent marking behaviors in domestic dogs</p>
+							</article>
+							<article class="style2" data-type="UX Design">
+								<span class="image">
+									<img src="images/spa.png" alt="" />
+								</span>
+								<a href="page5.html">
+									<h2>Spa de Esperanza Online Redesign</h2>
+									<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>UX Design</b>
+									</p>
+									<div class="content">
+										<h4>COGS 187B Wi '22</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">10-week website redesign for our client Spa De Esperanza's online experience</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/diamond-hands.png" alt="" />
+								</span>
+								<a href="page6.html">
+									<h2>Gamestop Price Action Short Documentary</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>MMART 122 Wi' 21</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">A short documentary video about Gamestop's price movements and its connection to Reddit's WallStreetBets</p>
+							</article>
+							<article class="style2" data-type="UX Design">
+								<span class="image">
+									<img src="images/enrolled.png" alt="" />
+								</span>
+								<a href="page7.html">
+									<h2>"Enrolled" Social Computing Space</h2>
+									<p style="text-align: center; margin-top: 2em; color: #9af9cb; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>UX Design</b>
+									</p>
+									<div class="content">
+										<h4>COGS 123 Spring '22</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">A 10-week project designing, prototyping, and user testing a novel social computing space</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/aphasia.png" alt="" />
+								</span>
+								<a href="page8.html">
+									<h2>Ahpasia Research Study Proposal</h2>
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>COGS 13 Wi' 21</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">10-page research proposal for a study on selective speech recovery in bilinguals</p>
+							</article>
+							<article class="style2" data-type="Research">
+								<span class="image">
+									<img src="images/mcwp.png" alt="" />
+								</span>
+								<a href="page9.html">
+									<h2>Portrayals of PTSD</h2>
+									<br />
+									<p style="text-align: center; margin-top: 2em; color: hotpink; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Research</b>
+									</p>
+									<div class="content">
+										<h4>MCWP 50 Wi 22</h4>
+									</div>
+								</a>
+								<p style="margin:1em; text-align: center;">Multisource research essay on the portrayals of PTSD in pop culture and in the film American Sniper</p>
+							</article>
+						</section>
+
+						<div class="container articles-container">
+							<div class="card" id="anchor2" data-type="Personal">
+								<div class="category" style="font-size: 1.6em;">Personal Projects</div>
+								<p style="padding: 22px; color: white; padding: 0 22px 0 22px; margin-bottom: 15px;">Personal Projects and Other Consulting Work</p>
+								<div style="display: flex; justify-content: center; gap: 1em; color: #9ac8f9; padding: 7px;">
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #40E0D0;">
+										<i style="color: #40E0D0;" class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<p style="text-align: center; margin: 0; padding: 5px 10px; border-radius: 15px; background-color: grey; color: #cb9af9;">
+										<i style="color: #cb9af9;" class="fa-solid fa-tags"></i> <b>Frontend Development</b>
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<section class="tiles" style="scroll-behavior: smooth; margin:0;">
+							<article class="style2" data-type="Data Science">
+								<span class="image">
+									<img src="images/pandas.JPG" alt="" />
+								</span>
+								<a href="page14.html">
+									<h2>Pandas Lyric Location Analyzer</h2>
+									<p style="text-align: center; margin-top: 2em; color: #40E0D0; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Data Science</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align: center; margin-top: 1em;">What locations does your favorite artist sing about the most? Time to find out!</p>
+							</article>
+							<article class="style2" data-type="Frontend Development">
+								<span class="image">
+									<img src="images/opal.JPG" alt="" />
+								</span>
+								<a href="page15.html">
+									<h2>Opal Aero Consulting</h2>
+									<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Frontend Development</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align: center; margin-top: 1em;">My consulting work setting up brand presence for an upcoming aviation maintenance firm</p>
+							</article>
+							<article class="style2" data-type="Frontend Development">
+								<span class="image">
+									<img src="images/mysite.JPG" alt="" />
+								</span>
+								<a href="generic.html">
+									<h2>My Portfolio Site</h2>
+									<p style="text-align: center; margin-top: 2em; color: #cb9af9; background: rgba(99, 99, 99, 0.6); padding: 0.25em; border-radius: 15px;">
+										<i class="fa-solid fa-tags"></i> <b>Frontend Development</b>
+									</p>
+									<div class="content"></div>
+								</a>
+								<p style="text-align: center; margin-top: 1em;">Motivations and work behind this portfolio site and other versions of it</p>
+							</article>
+						</section>
+					</div>
+				</div>
 			</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<section id="anchor3">
+						<h2 style="color: white;">Get in touch</h2>
+						<form method="post" action="https://formspree.io/f/xlevolyb">
+							<div class="fields">
+								<div class="field half">
+									<input type="text" name="name" id="name" placeholder="Name" />
+								</div>
+								<div class="field half">
+									<input type="email" name="email" id="email" placeholder="Email" />
+								</div>
+								<div class="field">
+									<textarea name="message" id="message" placeholder="Message"></textarea>
+								</div>
+							</div>
+							<ul class="actions">
+								<li><input type="submit" value="Send" class="primary" /></li>
+							</ul>
+						</form>
+					</section>
+					<section>
+						<h2 style="color: white;">Contact</h2>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/matt-lohier/" class="icon brands style2 fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+							<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+					</section>
+				</div>
+			</footer>
+		</div>
 
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/custom.js"></script>
 	</body>
 </html>
