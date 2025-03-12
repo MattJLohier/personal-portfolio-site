@@ -160,7 +160,7 @@ html {
     .category {
       font-size: 1.4em; /* Reduced from 2.4em */
       padding-left: 15px;
-      margin-top: 1.8em;
+      margin-top: 2.5em;
       margin-bottom: 0.8em;
       line-height: 1em;
     }
@@ -189,6 +189,7 @@ html {
             width: 300px;
             left: calc(50% - 150px);
             margin-top: 1em;
+            
         }
       }
 
