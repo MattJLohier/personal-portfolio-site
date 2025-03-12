@@ -176,17 +176,23 @@ html {
 
     .style2 .content {
     display: none;
-    }
+ }
+
 
 
     @media (max-width: 600px) {
         a.private-project > p {
           margin-top: 0 !important;
         }
+
+        .card-image {
+            width: 300px;
+            left: calc(50% - 150px);
+            margin-top: 1em;
+        }
       }
 
   }
-
 
 
 
