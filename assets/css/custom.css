@@ -154,6 +154,88 @@ html {
 	margin-top: -12px;
 }
 
+
+
+@media (max-width: 768px) {
+    .category {
+      font-size: 1.4em; /* Reduced from 2.4em */
+      padding-left: 15px;
+      margin-top: 1.8em;
+      margin-bottom: 0.8em;
+      line-height: 1em;
+    }
+  
+    .heading {
+      font-size: 1em; /* Reduced from 1.5em */
+      padding-left: 15px;
+    }
+
+    p {
+        line-height: 1.4; /* Adjust this value as needed */
+      }
+
+    .style2 .content {
+    display: none;
+    }
+
+
+    @media (max-width: 600px) {
+        a.private-project > p {
+          margin-top: 0 !important;
+        }
+      }
+
+  }
+
+
+
+
+/* Tag styling */
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers content; use space-evenly if you need extra spacing */
+    text-align: center;
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: grey;
+  }
+  
+  /* Specific color overrides */
+  .tag-research { color: hotpink; }
+  .tag-data-viz { color: #4C3BCF; }
+  .tag-data-science { color: #40E0D0; }
+  
+.tag-ux {
+    color: #9af9cb;
+  }
+  
+  .tag-writing {
+    color: #ffc04c;
+  }
+  
+  /* Container for the tags */
+  .tag-container {
+    display: flex;
+    justify-content: center;
+    gap: 1em; /* Default gap for larger screens */
+    color: #9ac8f9;
+    padding: 7px;
+    flex-wrap: wrap;
+  }
+  
+  /* Media query for mobile devices */
+  @media (max-width: 600px) {
+    .tag-container {
+      gap: 0.5em; /* Reduced gap on mobile */
+    }
+  }
+  
+  .tag i {
+    margin-right: 0.4em; /* or whatever spacing you prefer */
+  }
+
 .heading:hover {
 	cursor: pointer;
 }

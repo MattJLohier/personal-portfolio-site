@@ -1,12 +1,20 @@
+const enableMobileCheck = false; // Set to true to enable mobile check
+
+
 function checkViewport() {
-	if (window.innerWidth < 768) {
-		document.getElementById('hidden-content').style.display = 'none';
-		document.getElementById('mobile-message').style.display = 'block';
-	} else {
-		document.getElementById('hidden-content').style.display = 'block';
-		document.getElementById('mobile-message').style.display = 'none';
-	}
-}
+    if (!enableMobileCheck) {
+      document.getElementById('hidden-content').style.display = 'block';
+      document.getElementById('mobile-message').style.display = 'none';
+      return;
+    }
+    if (window.innerWidth < 768) {
+      document.getElementById('hidden-content').style.display = 'none';
+      document.getElementById('mobile-message').style.display = 'block';
+    } else {
+      document.getElementById('hidden-content').style.display = 'block';
+      document.getElementById('mobile-message').style.display = 'none';
+    }
+  }
 
 function showPopupAndRedirect(url) {
 	const popupOverlay = document.getElementById('popup-overlay');
@@ -180,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create and append the overlay element for the private project message
         let overlay = document.createElement('div');
         overlay.className = 'private-overlay-image';
-        overlay.innerHTML = '<span class="first-line">Private Project 🔒</span><span class="second-line">Reach Out For More Details...</span>';
+        overlay.innerHTML = '<span class="first-line">Private Project 🔒</span><span class="second-line">reach out for more details...</span>';
         overlay.style.transition = 'opacity 0.5s';
         overlay.style.opacity = '0'; // Start transparent
         imageContainer.appendChild(overlay);
