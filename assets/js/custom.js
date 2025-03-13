@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Initialize display for projects and cards
 	const projects = document.querySelectorAll('article.style2');
 	const cards = document.querySelectorAll('.card');
-	const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
 
 	projects.forEach(project => project.style.display = 'block');
 	cards.forEach(card => card.style.display = 'block');
@@ -114,33 +113,76 @@ function showFilterPopup(color) {
 }
 
 function filterProjects(type, color) {
-	const projects = document.querySelectorAll('article.style2');
-	const buttons = document.querySelectorAll('.filter-bar p');
-	const cards = document.querySelectorAll('.card');
-	const alwaysVisibleCardIds = ['anchor2', 'anchor1'];
-
-	// Filter projects
-	projects.forEach(project => {
-		const projectType = project.getAttribute('data-type') || '';
-		project.style.display = (type === 'all' || projectType.includes(type)) ? 'block' : 'none';
-	});
-
-	// Filter cards
-	cards.forEach(card => {
-		const cardType = card.getAttribute('data-type') || '';
-		card.style.display = (alwaysVisibleCardIds.includes(card.id) || type === 'all' || cardType.includes(type)) ? 'block' : 'none';
-	});
-
-	// Update active state on buttons
-	buttons.forEach(button => button.classList.remove('active'));
-	buttons.forEach(button => {
-		if (button.getAttribute('data-type') === type) {
-			button.classList.add('active');
-		}
-	});
-
-	showFilterPopup(color);
-}
+    const lowerType = type.toLowerCase();
+    
+    // ----- Filter Tile Projects (inside <section class="tiles">) -----
+    const tiles = document.querySelectorAll('section.tiles article.style2');
+    tiles.forEach(tile => {
+      const tileType = (tile.getAttribute('data-type') || '').toLowerCase();
+      tile.style.display = (type === 'all' || tileType.includes(lowerType)) ? 'block' : 'none';
+    });
+    
+    // ----- Filter Cards Inside Articles Containers -----
+    // Process each container that holds card(s)
+    const cardContainers = document.querySelectorAll('.container.articles-container');
+    cardContainers.forEach(container => {
+      let anyCardVisible = false;
+      // Process each card within this container
+      const cards = container.querySelectorAll('.card');
+      cards.forEach(card => {
+        let matches = false;
+        if (type === 'all') {
+          matches = true;
+        } else {
+          // Check the card's own data-type attribute
+          const dataType = (card.getAttribute('data-type') || '').toLowerCase();
+          if (dataType && dataType.includes(lowerType)) {
+            matches = true;
+          } else {
+            // First, check for any descendant with the "tag" class
+            const tagElements = card.querySelectorAll('p.tag');
+            for (const tagElem of tagElements) {
+              if (tagElem.textContent.toLowerCase().includes(lowerType)) {
+                matches = true;
+                break;
+              }
+            }
+            // If no match found, also check any <b> elements in case the tags aren't marked with a class
+            if (!matches) {
+              const bElements = card.querySelectorAll('b');
+              for (const bElem of bElements) {
+                if (bElem.textContent.toLowerCase().includes(lowerType)) {
+                  matches = true;
+                  break;
+                }
+              }
+            }
+          }
+        }
+        // Show or hide the card based on whether it matches
+        card.style.display = matches ? 'block' : 'none';
+        if (matches) {
+          anyCardVisible = true;
+        }
+      });
+      // Hide the container if none of its cards are visible; otherwise, show it
+      container.style.display = anyCardVisible ? '' : 'none';
+    });
+    
+    // ----- Update Active State on Filter Buttons -----
+    const buttons = document.querySelectorAll('.filter-bar p');
+    buttons.forEach(button => {
+      button.classList.remove('active');
+      if (button.getAttribute('data-type').toLowerCase() === lowerType) {
+        button.classList.add('active');
+      }
+    });
+    
+    showFilterPopup(color);
+  }
+  
+  
+  
 
 
 // Private project click handler
