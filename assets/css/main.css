@@ -1881,7 +1881,7 @@ body, input, select, textarea {
 			display: inline-block;
 			text-align: center;
 			line-height: 2.65em;
-			color: inherit;
+			color: lightgray;
 		}
 
 			.icon.style2:before {
@@ -3433,13 +3433,13 @@ body, input, select, textarea {
 			}
 
 			#footer > .inner section:nth-child(1) {
-				width: calc(66% - 2.5em);
+				width: calc(77% - 2.5em);
 				margin-right: 2.5em;
 			}
 
 			#footer > .inner section:nth-child(2) {
-				width: calc(33% - 2.5em);
-				margin-left: 2.5em;
+				width: calc(29% - 2.5em);
+				margin-left: 1.5em;
 			}
 
 			#footer > .inner .copyright {
@@ -3504,20 +3504,20 @@ body, input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			#footer {
-				padding: 3em 0 1em 0 ;
+				padding: 1em 0 1em 0 ;
 			}
 
 				#footer > .inner {
 					-moz-flex-direction: column;
 					-webkit-flex-direction: column;
 					-ms-flex-direction: column;
-					flex-direction: column;
+					flex-direction: column-reverse;
 				}
 
 					#footer > .inner section:nth-child(1) {
 						width: 100%;
 						margin-right: 0;
-						margin: 3em 0 0 0;
+						margin: 0 0 0 0;
 					}
 
 					#footer > .inner section:nth-child(2) {
@@ -3527,6 +3527,7 @@ body, input, select, textarea {
 						order: -1;
 						width: 100%;
 						margin-left: 0;
+						margin: 1em 0 0 0;
 					}
 
 					#footer > .inner .copyright {

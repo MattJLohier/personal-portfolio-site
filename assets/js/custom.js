@@ -256,3 +256,59 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach click events to any element with the data-copy attribute
+    document.querySelectorAll('[data-copy]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          const textToCopy = el.getAttribute('data-copy');
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              showCopiedPopup(el);
+            })
+            .catch(err => console.error('Error copying text: ', err));
+        });
+      });
+  });
+  
+  function showCopiedPopup(targetElement) {
+    // Create the popup element
+    const popup = document.createElement('div');
+    popup.textContent = 'Copied to clipboard!';
+    // Style the popup (adjust as needed)
+    popup.style.position = 'absolute';
+    popup.style.background = '#333';
+    popup.style.color = '#fff';
+    popup.style.padding = '5px 10px';
+    popup.style.borderRadius = '5px';
+    popup.style.fontSize = '0.9em';
+    popup.style.zIndex = '10000';
+    popup.style.opacity = '0';
+    popup.style.transition = 'opacity 0.3s';
+  
+    // Append to body so it can be positioned relative to the viewport
+    document.body.appendChild(popup);
+  
+    // Get the bounding rectangle of the clicked element
+    const rect = targetElement.getBoundingClientRect();
+    // Calculate position: For example, place the popup just above the element
+    // You might need to adjust the offset (here, 40px above)
+    popup.style.top = (rect.top + window.pageYOffset - 40) + 'px';
+    popup.style.left = (rect.left + window.pageXOffset) + 'px';
+  
+    // Fade in the popup
+    requestAnimationFrame(() => {
+      popup.style.opacity = '1';
+    });
+  
+    // Remove the popup after 2 seconds
+    setTimeout(() => {
+      popup.style.opacity = '0';
+      setTimeout(() => {
+        popup.remove();
+      }, 300);
+    }, 2000);
+  }
+  
