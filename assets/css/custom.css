@@ -194,6 +194,54 @@ html {
         }
       }
 
+
+      @media (max-width: 472px) {
+        a.private-project > p {
+          margin-top: 0 !important;
+        }
+
+        .card-image {
+            width: 300px;
+            left: calc(50% - 150px);
+            margin-top: 1em;
+            height: 80px;
+            
+        }
+
+        .pb {
+            top: 3.5em;
+        }
+
+        #nav {
+            height: 3.5em;
+        }
+
+        #header {
+            padding: 3.5em 0 0.1em 0;
+        }
+
+        #header nav ul {
+            margin-top: 1em;
+        
+        }
+
+        #header nav ul li a {
+            display: block;
+            position: relative;
+            height: 3em;
+            line-height: 3em;
+            padding: 0 1.5em;
+            background-color: #636363;
+            border-radius: 4px;
+            border: 0;
+            font-size: 1em;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+      }
+
   }
 
 
