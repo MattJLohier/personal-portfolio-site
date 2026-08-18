@@ -146,8 +146,14 @@ textarea:focus-visible,
 
 #header {
 	background-color: var(--bg-accent) !important;
-	border-bottom: 1px solid var(--border);
+	position: relative;
+	/* Replaces the .pb element below: that was a fixed bar pinned at top: 4.5em,
+	   so once the nav wrapped to two rows the header grew and the bar cut
+	   straight through it. A border always tracks the real header height. */
+	border-bottom: 4px solid var(--accent);
 }
+
+.pb { display: none !important; }
 
 /* Phantom gives these a #636363 plate. Muted text on it lands at 2.4:1,
    so use white on a darker plate instead (~10:1). */
@@ -911,6 +917,54 @@ input[type="submit"].primary:hover {
 
 @media (max-width: 980px) {
 	.card > .category { font-size: 1.6em; }
+}
+
+/* Phantom sizes the nav links at 0.8em of an already-reduced mobile base,
+   which lands at 9px text in a 57x27 box — unreadable and below the 44px
+   minimum touch target. Size them explicitly on small screens. */
+@media (max-width: 736px) {
+	/* Phantom fixes the nav out of flow (position: fixed) and reserves room for
+	   it with 4em of header padding. Once the links wrap to two rows the nav
+	   outgrows that reservation and spills past the header. Put it back in
+	   normal flow on small screens so the header sizes to its own content. */
+	#header nav {
+		position: static;
+		right: auto;
+		padding-bottom: 0;
+		/* main.css pins #nav to height: 4.5em, so a wrapped second row
+		   overflowed the element rather than growing it. */
+		height: auto;
+		line-height: normal;
+	}
+
+	#header {
+		padding: .9em 0 .9em 0;
+	}
+
+	#header nav ul {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: .5rem;
+		margin: 0;
+		padding: 0;
+	}
+
+	#header nav ul li {
+		margin: 0;
+		padding: 0;
+	}
+
+	#header nav ul li a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+		min-height: 44px;
+		line-height: 1.1;
+		padding: 0 1.1em;
+		font-size: .82rem;
+		letter-spacing: .06em;
+	}
 }
 
 @media (max-width: 736px) {
