@@ -194,5 +194,5 @@ window.onscroll = () => {
 	let degrees = scrollPercent * 360;
 	document.querySelector(
 		".pb"
-	).style.background = `linear-gradient(to right, #636363 ${scrollPercentRounded}%, #9ac8f9 ${scrollPercentRounded}%)`;
+	).style.background = `linear-gradient(to right, #2c313a ${scrollPercentRounded}%, #7cc0ff ${scrollPercentRounded}%)`;
 };

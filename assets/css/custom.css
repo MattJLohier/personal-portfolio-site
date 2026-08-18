@@ -36,6 +36,7 @@
 	--tag-aieng:     #a3e635;
 
 	/* Geometry */
+	--nav-h:         4.5em;    /* sticky nav height; .pb rides directly below */
 	--radius:        14px;
 	--radius-sm:     8px;
 	--radius-pill:   999px;
@@ -144,16 +145,27 @@ textarea:focus-visible,
    2. Header / nav
    -------------------------------------------------------------------------- */
 
+/* The sticky bar itself. main.css ships it as #282828; retheme it rather than
+   removing the background, since it overlays content as the page scrolls. */
+#nav {
+	background-color: var(--bg-accent) !important;
+	height: var(--nav-h);
+	border-bottom: 1px solid var(--border);
+}
+
+/* .pb is the scroll-progress bar (main.js paints its gradient on scroll).
+   It rides immediately below the sticky nav, so its offset has to follow the
+   nav height rather than the hardcoded 4.5em it shipped with. */
+.pb {
+	top: var(--nav-h);
+	height: 4px;
+	background: var(--accent);
+}
+
 #header {
 	background-color: var(--bg-accent) !important;
 	position: relative;
-	/* Replaces the .pb element below: that was a fixed bar pinned at top: 4.5em,
-	   so once the nav wrapped to two rows the header grew and the bar cut
-	   straight through it. A border always tracks the real header height. */
-	border-bottom: 4px solid var(--accent);
 }
-
-.pb { display: none !important; }
 
 /* Phantom gives these a #636363 plate. Muted text on it lands at 2.4:1,
    so use white on a darker plate instead (~10:1). */
@@ -923,22 +935,26 @@ input[type="submit"].primary:hover {
    which lands at 9px text in a 57x27 box — unreadable and below the 44px
    minimum touch target. Size them explicitly on small screens. */
 @media (max-width: 736px) {
-	/* Phantom fixes the nav out of flow (position: fixed) and reserves room for
-	   it with 4em of header padding. Once the links wrap to two rows the nav
-	   outgrows that reservation and spills past the header. Put it back in
-	   normal flow on small screens so the header sizes to its own content. */
+	/* Nav stays fixed (sticky) on mobile too. It is a single row, so its height
+	   is predictable — declare it via --nav-h so .pb lines up underneath and
+	   the header reserves the right amount of space. */
+	:root {
+		--nav-h: 68px;
+	}
+
 	#header nav {
-		position: static;
+		left: 0;
 		right: auto;
+		width: 100%;
+		height: var(--nav-h);
+		display: flex;
+		align-items: center;
 		padding-bottom: 0;
-		/* main.css pins #nav to height: 4.5em, so a wrapped second row
-		   overflowed the element rather than growing it. */
-		height: auto;
 		line-height: normal;
 	}
 
 	#header {
-		padding: .9em 0 .9em 0;
+		padding: calc(var(--nav-h) + 14px) 0 0.1em 0;
 	}
 
 	/* Four equal-width buttons filling one row. Wrapping put CONTACT alone on
