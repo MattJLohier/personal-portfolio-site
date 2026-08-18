@@ -941,29 +941,40 @@ input[type="submit"].primary:hover {
 		padding: .9em 0 .9em 0;
 	}
 
+	/* Four equal-width buttons filling one row. Wrapping put CONTACT alone on
+	   a second line, which looked broken; the font scales with the viewport
+	   instead so everything stays on one line down to 320px. */
 	#header nav ul {
-		flex-wrap: wrap;
+		display: flex;
+		flex-wrap: nowrap;
 		justify-content: center;
-		gap: .5rem;
+		gap: .35rem;
+		width: 100%;
 		margin: 0;
-		padding: 0;
+		padding: 0 .6rem;
+		box-sizing: border-box;
 	}
 
 	#header nav ul li {
+		flex: 1 1 0;
+		min-width: 0;
 		margin: 0;
 		padding: 0;
 	}
 
 	#header nav ul li a {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
 		height: auto;
 		min-height: 44px;
 		line-height: 1.1;
-		padding: 0 1.1em;
-		font-size: .82rem;
-		letter-spacing: .06em;
+		padding: 0 .25em;
+		font-size: clamp(10px, 3vw, 13px);
+		letter-spacing: .02em;
+		white-space: nowrap;
+		box-sizing: border-box;
 	}
 }
 
