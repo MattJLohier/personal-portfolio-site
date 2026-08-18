@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Placeholder pages, also marked noindex in their markup
+Disallow: /private.html
+Disallow: /generic.html
+
+Sitemap: https://matt-lohier.com/sitemap.xml
