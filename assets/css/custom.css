@@ -1,52 +1,829 @@
-/* Hide scrollbar for Chrome, Safari, and Opera */
-html::-webkit-scrollbar {
-	width: 0px;
+/* ==========================================================================
+   Matt Lohier — portfolio theme layer
+   Sits on top of HTML5 UP "Phantom" (assets/css/main.css).
+   All colour, spacing and surface decisions live here as custom properties so
+   a palette change is a one-line edit rather than a find-and-replace.
+   ========================================================================== */
+
+:root {
+	/* Surfaces — dark, low-chroma neutrals */
+	--bg:            #16181c;
+	--bg-accent:     #1b1e24;
+	--surface:       #22262c;
+	--surface-2:     #2c313a;
+	--surface-3:     #363c47;
+	--border:        #3a4049;
+
+	/* Text */
+	--text:          #e8eaed;
+	--text-muted:    #a8b0bb;
+	--text-dim:      #7d8794;
+
+	/* Brand accent */
+	--accent:        #7cc0ff;
+	--accent-strong: #4da3ff;
+	--accent-ink:    #0d1117;
+
+	/* Category colours — tuned for >=4.5:1 on --surface-2 */
+	--tag-research:  #ff85c2;
+	--tag-datasci:   #45e0d0;
+	--tag-dataviz:   #a99cff;
+	--tag-ux:        #8ff5c4;
+	--tag-writing:   #ffc04c;
+	--tag-frontend:  #cb9af9;
+	--tag-techdocs:  #f0f19a;
+	--tag-marketing: #ff7a85;
+	--tag-aieng:     #a3e635;
+
+	/* Geometry */
+	--radius:        14px;
+	--radius-sm:     8px;
+	--radius-pill:   999px;
+	--measure:       42rem;     /* readable line length; rem so every
+	                               block shares one column width */
+	--shadow:        0 2px 4px rgba(0,0,0,.28), 0 8px 24px rgba(0,0,0,.24);
+	--shadow-lg:     0 4px 8px rgba(0,0,0,.32), 0 16px 48px rgba(0,0,0,.34);
 }
 
-/* Hide scrollbar for IE, Edge, and Firefox */
+/* --------------------------------------------------------------------------
+   1. Base / page shell
+   -------------------------------------------------------------------------- */
+
 html {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+	scroll-behavior: smooth;
+	scroll-padding-top: 7em;
 }
 
-#hidden-content {
-	display: none;
-}
-#mobile-message {
-	display: none;
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	*, *::before, *::after {
+		animation-duration: .001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: .001ms !important;
+	}
 }
 
-/* Popup overlay styling */
+body {
+	background: var(--bg);
+	color: var(--text);
+	overflow-x: hidden;     /* belt-and-braces against stray wide children */
+}
+
+#wrapper {
+	background-color: var(--bg) !important;
+	background-image:
+		radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,192,255,.10), transparent 60%),
+		radial-gradient(ellipse 60% 40% at 100% 0%, rgba(203,154,249,.06), transparent 60%) !important;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height: 100vh;
+}
+
+#main { padding: 0 0 5em 0; }
+
+#main > .inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	box-sizing: border-box;
+}
+
+/* Typography rebalanced for a dark ground */
+body, input, select, textarea { color: var(--text); }
+h1, h2, h3, h4, h5, h6 { color: var(--text); }
+p, li { color: var(--text-muted); }
+strong, b { color: var(--text); }
+hr { border-color: var(--border); }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-strong); }
+
+/* Visible, consistent focus ring — the template had none */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+.filter-bar p:focus-visible {
+	outline: 3px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: var(--radius-sm);
+}
+
+/* Screen-reader-only text */
+.sr-only {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	padding: 0; margin: -1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 10001;
+	padding: .75em 1.25em;
+	background: var(--accent);
+	color: var(--accent-ink);
+	font-weight: 700;
+	border-radius: 0 0 var(--radius-sm) 0;
+}
+.skip-link:focus {
+	left: 0;
+	color: var(--accent-ink);
+}
+
+/* --------------------------------------------------------------------------
+   2. Header / nav
+   -------------------------------------------------------------------------- */
+
+#header {
+	background-color: var(--bg-accent) !important;
+	border-bottom: 1px solid var(--border);
+}
+
+/* Phantom gives these a #636363 plate. Muted text on it lands at 2.4:1,
+   so use white on a darker plate instead (~10:1). */
+#header nav ul li a {
+	color: #ffffff !important;
+	background-color: var(--surface-3) !important;
+	border: 1px solid var(--border);
+	transition: background-color .2s ease, border-color .2s ease;
+}
+
+#header nav ul li a:hover,
+#header nav ul li a:focus {
+	color: #ffffff !important;
+	background-color: #4a5260 !important;
+	border-color: var(--accent);
+}
+
+#header .logo,
+#header .logo:hover { color: var(--text); }
+
+/* --------------------------------------------------------------------------
+   3. Intro block (home)
+   -------------------------------------------------------------------------- */
+
+.intro-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: .5rem;
+	margin-top: 2em;
+}
+
+.intro-block .img2 {
+	margin-right: 0;
+	box-shadow: var(--shadow-lg);
+}
+
+.intro-name {
+	margin-bottom: .6em !important;
+	letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Filter bar
+   -------------------------------------------------------------------------- */
+
+.filter-bar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: .5rem;
+	text-align: center;
+	margin: 3rem auto 2.75rem;
+	padding: 0 .5rem;
+	max-width: 60rem;
+}
+
+.filter-bar p {
+	display: inline-flex;
+	align-items: center;
+	gap: .45em;
+	margin: 0;
+	padding: .45em 1em;
+	border-radius: var(--radius-pill);
+	background-color: var(--surface-2);
+	border: 1px solid transparent;
+	cursor: pointer;
+	font-size: .95em;
+	line-height: 1.2;
+	color: var(--text);
+	transition: background-color .2s ease, border-color .2s ease, transform .12s ease;
+}
+
+.filter-bar p:hover {
+	background-color: var(--surface-3);
+	color: var(--text);
+	transform: translateY(-1px);
+}
+
+.filter-bar p.active {
+	background-color: var(--surface-3);
+	border-color: currentColor;
+	font-weight: 700;
+}
+
+/* Category colours, applied to text and icon together */
+.filter-bar p[data-color="white"],
+.filter-bar p[data-color="white"] i        { color: var(--text); }
+.filter-bar p[data-color="hotpink"],
+.filter-bar p[data-color="hotpink"] i      { color: var(--tag-research); }
+.filter-bar p[data-color="#40E0D0"],
+.filter-bar p[data-color="#40E0D0"] i      { color: var(--tag-datasci); }
+.filter-bar p[data-color="#4C3BCF"],
+.filter-bar p[data-color="#4C3BCF"] i      { color: var(--tag-dataviz); }
+.filter-bar p[data-color="#9af9cb"],
+.filter-bar p[data-color="#9af9cb"] i      { color: var(--tag-ux); }
+.filter-bar p[data-color="#ffc04c"],
+.filter-bar p[data-color="#ffc04c"] i      { color: var(--tag-writing); }
+.filter-bar p[data-color="#cb9af9"],
+.filter-bar p[data-color="#cb9af9"] i      { color: var(--tag-frontend); }
+.filter-bar p[data-color="#f8f99a"],
+.filter-bar p[data-color="#f8f99a"] i      { color: var(--tag-techdocs); }
+.filter-bar p[data-color="#e04050"],
+.filter-bar p[data-color="#e04050"] i      { color: var(--tag-marketing); }
+.filter-bar p[data-color="#a3e635"],
+.filter-bar p[data-color="#a3e635"] i      { color: var(--tag-aieng); }
+
+#filter-popup {
+	position: absolute;
+	top: 1em;
+	right: 1.5em;
+	padding: 0 1em;
+	border-radius: var(--radius-sm);
+	color: var(--tag-ux);
+	font-size: .95em;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .5s ease, visibility .5s ease;
+}
+
+#filter-popup.visible { opacity: 1; visibility: visible; }
+#filter-popup-text i { margin-right: 5px; }
+
+/* --------------------------------------------------------------------------
+   5. Role / experience cards
+   -------------------------------------------------------------------------- */
+
+.container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.articles-container { margin-top: 3.5rem; }
+
+.card {
+	position: relative;
+	width: 100%;
+	max-width: 1100px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	padding: 1.5em;
+	border-radius: var(--radius);
+	box-shadow: var(--shadow);
+	margin: 3.25em 0 1em;
+}
+
+/* Logo badge — fluid, so it can no longer overflow narrow viewports */
+.card-image {
+	position: absolute;
+	top: -2.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: min(400px, 82%);
+	height: 100px;
+	overflow: hidden;
+	border-radius: var(--radius);
+	border: 3px solid var(--border);
+	background-color: #f2f2f2;
+	padding: 10px;
+	box-sizing: border-box;
+	transition: transform .2s ease;
+}
+
+.card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border-radius: 0 !important;
+}
+
+/* Most logos here are dark artwork and need the light plate above. The ModalAI
+   mark is the opposite — white type on transparency — so it gets a dark one. */
+.card-image--dark {
+	background-color: #14171c;
+	border-color: #2f353e;
+}
+
+.card-image:hover { transform: translateX(-50%) scale(.98); }
+
+/* Phantom sets every h2-h6 to uppercase / 0.05em tracking / 2em bottom margin.
+   Card headings read as prose, so opt out of all three. */
+/* A card with no logo badge does not need the space the badge sits in. */
+.card--nologo { margin-top: 2em; }
+.card--nologo > .category { margin-top: .25em; }
+
+.card > .category {
+	font-size: 1.9em;
+	font-weight: 700;
+	color: var(--text);
+	padding-left: 22px;
+	margin: 1.6em 0 0;
+	line-height: 1.2;
+	text-transform: none;
+	letter-spacing: -0.01em;
+}
+
+/* Dates and location read as two distinct facts, not one run-on string. */
+.card > .card-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .35em 1.4em;
+	padding-left: 22px;
+	margin: .6em 0 0;
+	font-size: .9em;
+	font-weight: 600;
+	letter-spacing: .02em;
+	text-transform: none;
+}
+
+.card-meta .card-dates    { color: var(--accent); }
+.card-meta .card-location { color: var(--text-dim); font-weight: 500; }
+.card-meta i              { margin-right: .45em; opacity: .85; }
+
+/* kept for any heading markup that has not been converted */
+.card > .heading {
+	font-weight: 600;
+	font-size: .95em;
+	color: var(--accent);
+	padding-left: 22px;
+	margin: .5em 0 0;
+	letter-spacing: .02em;
+	text-transform: none;
+}
+
+.card-body {
+	color: var(--text-muted);
+	padding: 0 22px;
+	margin: 1em 0 1.5em;
+	max-width: 88ch;
+	line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. Tags
+   -------------------------------------------------------------------------- */
+
+.tag-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: .6em;
+	padding: 7px;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	gap: .4em;
+	justify-content: center;
+	text-align: center;
+	margin: 0;
+	padding: .35em .85em;
+	border-radius: var(--radius-pill);
+	background-color: var(--surface-2);
+	border: 1px solid var(--border);
+	font-size: .9em;
+	line-height: 1.2;
+}
+
+.tag i { margin-right: 0; }
+
+.tag-research   { color: var(--tag-research); }
+.tag-data-viz   { color: var(--tag-dataviz); }
+.tag-data-science { color: var(--tag-datasci); }
+.tag-frontend   { color: var(--tag-frontend); }
+.tag-ux         { color: var(--tag-ux); }
+.tag-writing    { color: var(--tag-writing); }
+.tag-techdocs   { color: var(--tag-techdocs); }
+.tag-marketing  { color: var(--tag-marketing); }
+.tag-aieng      { color: var(--tag-aieng); }
+
+/* --------------------------------------------------------------------------
+   7. Project tiles
+   -------------------------------------------------------------------------- */
+
+.tiles article > .image {
+	background-color: var(--surface-2);
+	box-shadow: var(--shadow);
+}
+
+/* The template washed screenshots out under a 90%-opaque blue plate. Use a
+   dark scrim instead: heavy enough that the title always reads, light enough
+   that the screenshot is still recognisable. Lifts further on hover. */
+.tiles article > .image:before {
+	background-color: #0b1017 !important;
+	opacity: .85 !important;
+	border: 1px solid var(--border) !important;
+	border-radius: var(--radius) !important;
+}
+
+.tiles article:hover > .image:before,
+.tiles article:focus-within > .image:before {
+	opacity: .42 !important;
+}
+
+/* Source thumbnails vary in aspect ratio and framing. Pin every tile image to
+   the same box and crop to fill, so the grid reads at one consistent scale.
+   Anchored to the top because most of these are documents and UI screenshots,
+   where the useful content is at the top. */
+.tiles article > .image {
+	aspect-ratio: 1 / 1;
+}
+
+.tiles article > .image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
+	border-radius: var(--radius);
+}
+
+.tiles article h2 {
+	text-shadow: 0 2px 16px rgba(0,0,0,.95), 0 2px 5px rgba(0,0,0,.95), 0 0 2px rgba(0,0,0,.8);
+}
+
+/* Tag pill sitting on a tile */
+.tile-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: .4em;
+	margin: 1.25em auto 0;
+	padding: .3em .9em;
+	border-radius: var(--radius-pill);
+	background: rgba(12, 14, 18, .78);
+	backdrop-filter: blur(3px);
+	font-size: .85em;
+	line-height: 1.2;
+	text-align: center;
+}
+
+.tile-tag-research   { color: var(--tag-research); }
+.tile-tag-datasci    { color: var(--tag-datasci); }
+.tile-tag-dataviz    { color: var(--tag-dataviz); }
+.tile-tag-ux         { color: var(--tag-ux); }
+.tile-tag-writing    { color: var(--tag-writing); }
+.tile-tag-frontend   { color: var(--tag-frontend); }
+.tile-tag-techdocs   { color: var(--tag-techdocs); }
+.tile-tag-marketing  { color: var(--tag-marketing); }
+.tile-tag-aieng      { color: var(--tag-aieng); }
+
+/* Caption under a tile */
+.tile-caption {
+	margin: 1em .25em 0;
+	text-align: center;
+	font-size: .92em;
+	line-height: 1.5;
+	color: var(--text-muted);
+}
+
+.tiles article .content h4 { color: var(--text); }
+
+/* --------------------------------------------------------------------------
+   8. Project (sub) pages
+   -------------------------------------------------------------------------- */
+
+.project-page #main > .inner { max-width: 1100px; }
+
+/* Prose was capped at the measure but left-aligned inside a 1100px container,
+   while headings ran the full width — so text pinned to the left with a large
+   dead zone on the right. Put every text-level block in one centred column and
+   let only figures and embeds use the full container width. */
+.project-page #main > .inner > h1,
+.project-page #main > .inner > h2,
+.project-page #main > .inner > h3,
+.project-page #main > .inner > h4,
+.project-page #main > .inner > h5,
+.project-page #main > .inner > h6,
+.project-page #main > .inner > p,
+.project-page #main > .inner > ul,
+.project-page #main > .inner > ol,
+.project-page #main > .inner > blockquote,
+.project-page #main > .inner > table,
+.project-page #main > .inner > pre,
+.project-page #main > .inner > hr,
+.project-page #main > .inner > .project-meta,
+.project-page #main > .inner > .project-context {
+	max-width: var(--measure);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Buttons are inline by default, so they would ignore the column and sit at the
+   container edge. Make them block-level and align them to the column. */
+.project-page #main > .inner > a.button {
+	display: block;
+	width: -moz-fit-content;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--measure);
+}
+
+.project-page #main > .inner > .figure-grid,
+.project-page #main > .inner > .video-row {
+	max-width: 100%;
+}
+
+.project-page h1 {
+	margin: 0 auto .35em;
+	letter-spacing: -0.015em;
+}
+
+.project-page h3 {
+	margin: 2em auto .4em !important;
+	color: var(--text);
+	font-size: 1.1em;
+	letter-spacing: .08em;
+}
+
+.project-page h3:first-of-type { margin-top: 1.2em !important; }
+
+/* Meta row under the project title */
+.project-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .5em 1em;
+	margin: 0 auto .5em;
+}
+
+.project-meta .project-category {
+	display: inline-flex;
+	align-items: center;
+	gap: .4em;
+	margin: 0;
+	font-size: 1.05em;
+	font-weight: 700;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.project-meta .project-tools {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .4em;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.project-meta .project-tools li {
+	display: inline-flex;
+	align-items: center;
+	gap: .35em;
+	margin: 0;
+	padding: .25em .7em;
+	border-radius: var(--radius-pill);
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+	color: var(--text-muted);
+	font-size: .8em;
+	line-height: 1.3;
+}
+
+.project-context {
+	color: var(--text-dim);
+	font-size: .95em;
+	margin: 0 auto 2em !important;
+	padding-bottom: 1.25em;
+	border-bottom: 1px solid var(--border);
+}
+
+/* Figures: replaces the old float/percentage-width inline styles */
+.figure-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+	gap: 1.25rem;
+	margin: 1.75rem 0;
+	align-items: start;
+}
+
+.figure-grid .image.main,
+.figure-grid span.image {
+	margin: 0;
+	width: 100%;
+}
+
+.project-page .image.main img,
+.figure-grid img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: var(--radius-sm);
+	background: #fff;
+	border: 1px solid var(--border);
+	box-shadow: var(--shadow);
+}
+
+/* Standalone figure (not in a grid): centred and capped so it does not
+   dwarf the prose column it sits next to. */
+.project-page .image.main {
+	display: block;
+	max-width: 900px;
+	margin: 1.75rem auto;
+}
+
+.figure-grid .image.main { max-width: none; margin: 0; }
+
+/* Embedded video: the source markup hard-codes width="700" height="500",
+   which overflows a phone. Let CSS drive the box instead. */
+.video-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1rem;
+	margin: 1.75rem 0;
+}
+
+.video-row > div { flex: 1 1 320px; max-width: 700px; }
+
+.project-page iframe {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	aspect-ratio: 16 / 9;
+	height: auto;
+	border: 0;
+	border-radius: var(--radius-sm);
+	background: #000;
+}
+
+/* Back link in the subpage header */
+.back-link {
+	display: inline-flex !important;
+	align-items: center;
+	gap: .6em;
+	letter-spacing: .1em;
+}
+
+/* --------------------------------------------------------------------------
+   9. Footer
+   -------------------------------------------------------------------------- */
+
+#footer { margin-bottom: 1em; }
+
+/* Phantom sizes these two panels at 77% and 29% — which overflows to 106% and
+   starves the contact column. Use an explicit two-column grid instead. */
+#footer > .inner {
+	display: grid;
+	grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+	align-items: start;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 1.5rem;
+	gap: 1.5rem;
+	box-sizing: border-box;
+}
+
+#footer > .inner > section:nth-child(1),
+#footer > .inner > section:nth-child(2) {
+	width: auto;
+	margin: 0;
+}
+
+.footer-panel {
+	background-color: var(--surface);
+	border: 1px solid var(--border);
+	padding: 1.75em;
+	border-radius: var(--radius);
+	margin: 0 !important;
+}
+
+.footer-panel h2 {
+	color: var(--text);
+	font-size: 1.6em;
+	margin-bottom: 0;
+	text-transform: none;
+	letter-spacing: normal;
+	font-weight: 600;
+}
+
+.footer-panel .footer-sub {
+	color: var(--text-dim);
+	font-size: .95em;
+	margin-bottom: 1.2em;
+	text-transform: none;
+	letter-spacing: normal;
+	font-weight: 400;
+}
+
+#footer input[type="text"],
+#footer input[type="email"],
+#footer textarea {
+	background: var(--bg-accent);
+	border-color: var(--border);
+	color: var(--text);
+	border-radius: var(--radius-sm);
+	padding: 0 1em;                 /* Phantom ships these at padding: 0 */
+}
+
+#footer textarea {
+	padding: .85em 1em;
+	line-height: 1.5;
+	min-height: 9em;
+}
+
+#footer input[type="text"]:focus,
+#footer input[type="email"]:focus,
+#footer textarea:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 1px var(--accent);
+}
+
+#footer input::placeholder,
+#footer textarea::placeholder { color: var(--text-dim); opacity: 1; }
+
+#footer .icons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .6rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#footer .icons li { padding: 0; }
+
+#footer .icons a {
+	color: var(--text-muted);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+}
+
+#footer .icons a:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	background-color: var(--surface-2);
+}
+
+/* --------------------------------------------------------------------------
+   10. Buttons
+   -------------------------------------------------------------------------- */
+
+.button.primary,
+input[type="submit"].primary {
+	background-color: var(--accent) !important;
+	color: var(--accent-ink) !important;
+	font-weight: 700;
+	border-radius: var(--radius-pill);
+	box-shadow: 0 2px 10px rgba(0,0,0,.28);
+}
+
+.button.primary:hover,
+input[type="submit"].primary:hover {
+	background-color: var(--accent-strong) !important;
+	color: var(--accent-ink) !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Overlays, popups, animations
+   -------------------------------------------------------------------------- */
+
 #popup-overlay {
 	display: none;
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
+	inset: 0;
+	background: rgba(0,0,0,.82);
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
 }
 
 #popup-message {
-	background: #282828;
+	background: var(--surface);
 	padding: 2em;
-	border-radius: 10px;
+	border-radius: var(--radius);
 	text-align: center;
-	color: white;
+	color: var(--text);
 	font-weight: 600;
 	font-size: 1.2em;
-	border: solid;
-	border-color: #9ac8f9;
-	border-width: 4px;
-	animation: none;
-}
-
-@keyframes borderFill {
-	0% { border-color: #9ac8f9; }
-	100% { border-color: green; }
+	border: 4px solid var(--accent);
 }
 
 .wave {
@@ -57,412 +834,114 @@ html {
 }
 
 @keyframes wave-animation {
-	0% { transform: rotate(0deg); }
-	10% { transform: rotate(14deg); }
-	20% { transform: rotate(-8deg); }
-	30% { transform: rotate(14deg); }
-	40% { transform: rotate(-4deg); }
-	50% { transform: rotate(10deg); }
-	60% { transform: rotate(0deg); }
-	100% { transform: rotate(0deg); }
+	0%   { transform: rotate(0deg); }
+	10%  { transform: rotate(14deg); }
+	20%  { transform: rotate(-8deg); }
+	30%  { transform: rotate(14deg); }
+	40%  { transform: rotate(-4deg); }
+	50%  { transform: rotate(10deg); }
+	60%, 100% { transform: rotate(0deg); }
 }
 
-#filter-popup {
-	position: absolute;
-	top: 10px;
-	left: 3%;
-	transform: translateX(-50%);
-	padding: 0px 20px;
-	border-radius: 5px;
-	color: lightgreen;
-	font-size: 1em;
-	z-index: 1000;
+/* Private-project overlay */
+/* While the private-project notice is up, the tile's own title/tag fade out. */
+.tiles article > a.private-project {
+	transition: opacity .35s ease;
+}
+
+.tiles article > a.private-project.is-revealing {
 	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
 }
 
-#filter-popup.visible {
-	opacity: 1;
-	visibility: visible;
-}
-
-#filter-popup-text i {
-	margin-right: 5px;
-}
-
-/* Container and card styles */
-.container {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-}
-
-.card {
-	width: 90%;
-	max-width: 90%;
-	background: #636363;
-	padding: 1.5em;
-	border-radius: 15px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	margin-bottom: 1em;
-	position: relative;
-	margin-top: 2.5em;
-}
-
-.card-image {
-	width: 400px;
-	height: 100px;
-	overflow: hidden;
+.private-overlay-image {
 	position: absolute;
-	top: -50px;
-	left: calc(50% - 200px);
-	border-radius: 15px;
-	border: 4px solid #f2f2f2;
-	background-color:#bfbfbf;
-	padding: 10px;
-}
-
-.card-image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.card-image:hover {
-	transform: scale(0.98);
-}
-
-/* Category, heading, and author styles */
-.category {
-	font-size: 2.4em;
-	font-weight: 600;
-	color: white;
-	padding-left: 22px;
-	margin-top: 1em;
-}
-
-.category:hover {
-	cursor: pointer;
-}
-
-.heading {
-	font-weight: 600;
-	font-size: 1.5em;
-	color: lightgray;
-	padding-left: 22px;
-	margin-top: -12px;
-}
-
-
-
-@media (max-width: 768px) {
-    .category {
-      font-size: 1.4em; /* Reduced from 2.4em */
-      padding-left: 15px;
-      margin-top: 1.5em;
-      margin-bottom: 0.8em;
-      line-height: 1em;
-    }
-  
-    .heading {
-      font-size: 1em; /* Reduced from 1.5em */
-      padding-left: 15px;
-    }
-
-    p {
-        line-height: 1.4; /* Adjust this value as needed */
-      }
-
-    .style2 .content {
-    display: none;
- }
-
-
-
-    @media (max-width: 600px) {
-        a.private-project > p {
-          margin-top: 0 !important;
-        }
-
-        .card-image {
-            width: 300px;
-            left: calc(50% - 150px);
-            margin-top: 1em;
-            height: 80px;
-            
-        }
-      }
-
-
-      @media (max-width: 472px) {
-        a.private-project > p {
-          margin-top: 0 !important;
-        }
-
-        .card-image {
-            width: 300px;
-            left: calc(50% - 150px);
-            margin-top: 1em;
-            height: 80px;
-            
-        }
-
-        .pb {
-            top: 3.9em;
-        }
-
-        #nav {
-            height: 3.9em;
-        }
-
-        #header {
-            padding: 3.5em 0 0.1em 0;
-        }
-
-        #header nav ul {
-            margin-top: 1em;
-        
-        }
-
-        #header nav ul li a {
-            display: block;
-            position: relative;
-            height: 3em;
-            line-height: 3em;
-            padding: 0 1.5em;
-            background-color: #636363;
-            border-radius: 4px;
-            border: 0;
-            font-size: 1em;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-      }
-
-  }
-
-
-
-/* Tag styling */
-.tag {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centers content; use space-evenly if you need extra spacing */
-    text-align: center;
-    margin: 0;
-    padding: 5px 10px;
-    border-radius: 15px;
-    background-color: grey;
-  }
-  
-  /* Specific color overrides */
-  .tag-research { color: hotpink; }
-  .tag-data-viz { color: #4C3BCF; }
-  .tag-data-science { color: #40E0D0; }
-  .tag-frontend { color: #cb9af9; }
-  
-.tag-ux {
-    color: #9af9cb;
-  }
-  
-  .tag-writing {
-    color: #ffc04c;
-  }
-  
-  /* Container for the tags */
-  .tag-container {
-    display: flex;
-    justify-content: center;
-    gap: 1em; /* Default gap for larger screens */
-    color: #9ac8f9;
-    padding: 7px;
-    flex-wrap: wrap;
-  }
-  
-  /* Media query for mobile devices */
-  @media (max-width: 600px) {
-    .tag-container {
-      gap: 0.5em; /* Reduced gap on mobile */
-    }
-  }
-  
-  .tag i {
-    margin-right: 0.4em; /* or whatever spacing you prefer */
-  }
-
-.heading:hover {
-	cursor: pointer;
-}
-
-.author {
-	color: gray;
-	font-weight: 400;
-	font-size: 11px;
-	padding-top: 20px;
-}
-
-.name {
-	font-weight: 600;
-}
-
-.name:hover {
-	cursor: pointer;
-}
-
-/* Filter bar styles */
-.filter-bar {
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: .35em;
+	background: rgba(18, 20, 24, .92);
 	text-align: center;
-	margin-bottom: 45px;
+	padding: 1em;
+	opacity: 0;
+	transition: opacity .4s ease;
+	pointer-events: none;
+	z-index: 200;
+	border-radius: var(--radius);
 }
 
-.filter-bar p {
-	display: inline-block;
-	margin: 5px;
-	padding: 5px 10px;
-	border-radius: 15px;
-	background-color: grey;
-	cursor: pointer;
-	font-size: 1em;
-	color: white;
+.private-overlay-image.is-visible { opacity: 1; }
+
+.private-overlay-image .first-line {
+	font-size: 1.15em;
+	color: var(--text);
+	font-weight: 700;
 }
 
-.filter-bar p:hover {
-	background-color: lightgray;
-	color: black;
+.private-overlay-image .second-line {
+	font-size: .9em;
+	color: var(--text-muted);
+	font-weight: 500;
 }
 
-/* Color styles for filter buttons */
-.filter-bar p[data-color="white"] { color: white; }
-.filter-bar p[data-color="hotpink"] { color: hotpink; }
-.filter-bar p[data-color="#40E0D0"] { color: #40E0D0; }
-.filter-bar p[data-color="#9af9cb"] { color: #9af9cb; }
-.filter-bar p[data-color="#ffc04c"] { color: #ffc04c; }
-.filter-bar p[data-color="#cb9af9"] { color: #cb9af9; }
-.filter-bar p[data-color="#4C3BCF"] { color: #4C3BCF; }
-.filter-bar p[data-color="#f8f99a"] { color: #f8f99a; }
+.tiles article > .image { position: relative; }
 
-/* Icon color styles for filter buttons */
-.filter-bar p i { margin-right: 5px; }
-.filter-bar p[data-color="white"] i { color: white; }
-.filter-bar p[data-color="hotpink"] i { color: hotpink; }
-.filter-bar p[data-color="#40E0D0"] i { color: #40E0D0; }
-.filter-bar p[data-color="#9af9cb"] i { color: #9af9cb; }
-.filter-bar p[data-color="#ffc04c"] i { color: #ffc04c; }
-.filter-bar p[data-color="#cb9af9"] i { color: #cb9af9; }
-.filter-bar p[data-color="#4C3BCF"] i { color: #4C3BCF; }
-.filter-bar p[data-color="#f8f99a"] i { color: #f8f99a; }
-
-/* Active state styles */
-.filter-bar p.active {
-	background-color: #9ac8f9;
-}
-.filter-bar p.active[data-color="white"] { color: white; }
-.filter-bar p.active[data-color="hotpink"] { color: hotpink; }
-.filter-bar p.active[data-color="#40E0D0"] { color: #40E0D0; }
-.filter-bar p.active[data-color="#9af9cb"] { color: #9af9cb; }
-.filter-bar p.active[data-color="#ffc04c"] { color: #ffc04c; }
-.filter-bar p.active[data-color="#cb9af9"] { color: #cb9af9; }
-.filter-bar p.active i[data-color="white"] { color: white; }
-.filter-bar p.active i[data-color="hotpink"] { color: hotpink; }
-.filter-bar p.active i[data-color="#40E0D0"] { color: #40E0D0; }
-.filter-bar p.active i[data-color="#9af9cb"] { color: #9af9cb; }
-	filter-bar p.active i[data-color="#ffc04c"] { color: #ffc04c; }
-.filter-bar p.active i[data-color="#cb9af9"] { color: #cb9af9; }
-.filter-bar p.active i[data-color="#4C3BCF"] { color: #4C3BCF; }
-.filter-bar p.active i[data-color="#f8f99a"] { color: #f8f99a; }
-
-/* Shake animation */
-@keyframes shake {
-	0% { transform: translate(1px, 1px) rotate(0deg); }
-	10% { transform: translate(-1px, -2px) rotate(-1deg); }
-	20% { transform: translate(-3px, 0px) rotate(1deg); }
-	30% { transform: translate(3px, 2px) rotate(0deg); }
-	40% { transform: translate(1px, -1px) rotate(1deg); }
-	50% { transform: translate(-1px, 2px) rotate(-1deg); }
-	60% { transform: translate(-3px, 1px) rotate(0deg); }
-	70% { transform: translate(3px, 1px) rotate(-1deg); }
-	80% { transform: translate(-1px, -1px) rotate(1deg); }
-	90% { transform: translate(1px, 2px) rotate(0deg); }
-	100% { transform: translate(1px, -2px) rotate(-1deg); }
+/* Copy-to-clipboard toast */
+.copy-toast {
+	position: fixed;
+	background: var(--surface-3);
+	color: var(--text);
+	padding: .55em 1em;
+	border-radius: var(--radius-sm);
+	border: 1px solid var(--border);
+	font-size: .9em;
+	z-index: 10000;
+	opacity: 0;
+	transition: opacity .3s ease;
+	pointer-events: none;
+	box-shadow: var(--shadow);
 }
 
-.shake {
-	animation: shake 0.5s;
-	animation-iteration-count: 1;
+.copy-toast.is-visible { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   12. Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 980px) {
+	.card > .category { font-size: 1.6em; }
 }
 
-/* --- Existing custom CSS remains --- */
+@media (max-width: 736px) {
+	#main > .inner { padding-left: 1rem; padding-right: 1rem; }
 
-/* New styles for private project feedback */
-.private-warning {
-    background-color: red !important;
-    transition: background-color 0.5s;
-  }
-  
-  /* Optional: a default style for the overlay message */
-  .private-message {
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-  }
-  
-/* Private project overlay for subtle messaging */
-.image {
-    position: relative;
-    z-index: 1; /* Lower z-index so overlay can be higher */
+	.card { padding: 1.25em .25em; }
+	.card > .category {
+		font-size: 1.35em;
+		padding-left: 15px;
+		margin-top: 1.4em;
+		line-height: 1.2;
+	}
+	.card > .heading { font-size: .95em; padding-left: 15px; }
+	.card > .card-meta { font-size: .82em; padding-left: 15px; gap: .25em 1em; }
+	.card-body { padding: 0 15px; }
+
+	.card-image { height: 76px; top: -2rem; }
+
+	.filter-bar { gap: .4rem; margin-bottom: 2rem; }
+	.filter-bar p { font-size: .85em; padding: .4em .8em; }
+
+	.project-meta { gap: .4em .6em; }
+
+	#footer > .inner { padding: 1rem; grid-template-columns: 1fr; }
+	.footer-panel { padding: 1.25em; }
+
+	.figure-grid { gap: 1rem; margin: 1.25rem 0; }
 }
 
-/* Updated overlay for private projects targeting only the image area */
-.private-overlay-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(40, 40, 40, 0.9); /* A dark, subtle overlay */
-    color: #f8f99a;                    /* Accent text color */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;                /* Ensures multi-line text is centered */
-    font-size: 1.2em;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    z-index: 9999; /* Very high to ensure it sits on top */
+@media (max-width: 480px) {
+	.card-image { height: 64px; top: -1.6rem; width: min(400px, 88%); }
+	.card > .category { font-size: 1.2em; }
+	.tile-caption { font-size: .88em; }
 }
-
-.private-overlay-image {
-    display: flex;
-    flex-direction: column; /* stacks children vertically */
-    align-items: center;    /* optional: centers text horizontally */
-    justify-content: center;/* optional: centers text vertically */
-    white-space: normal;    /* ensures whitespace is rendered normally */
-  }
-  
-  .first-line {
-    font-size: 24px; /* larger text for the first line */
-    color: white;
-    font-weight: bold;
-  }
-  
-  .second-line {
-    font-size: 16px; /* smaller text for the second line */
-    color: lightgray;
-    font-weight: 500;
-  }
-  

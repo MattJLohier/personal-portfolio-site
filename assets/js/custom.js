@@ -1,314 +1,255 @@
-const enableMobileCheck = false; // Set to true to enable mobile check
+/* Matt Lohier — portfolio behaviour
+   Progressive enhancement only: every bit of content is in the HTML and
+   visible without JavaScript. This file adds filtering, the private-project
+   overlay, click-to-copy and the resume interstitial. */
 
+(function () {
+	'use strict';
 
-function checkViewport() {
-    if (!enableMobileCheck) {
-      document.getElementById('hidden-content').style.display = 'block';
-      document.getElementById('mobile-message').style.display = 'none';
-      return;
-    }
-    if (window.innerWidth < 768) {
-      document.getElementById('hidden-content').style.display = 'none';
-      document.getElementById('mobile-message').style.display = 'block';
-    } else {
-      document.getElementById('hidden-content').style.display = 'block';
-      document.getElementById('mobile-message').style.display = 'none';
-    }
-  }
+	var SCROLL_OFFSET = 120;
 
-function showPopupAndRedirect(url) {
-	const popupOverlay = document.getElementById('popup-overlay');
-	const popupMessage = document.getElementById('popup-message');
-	popupOverlay.style.display = 'flex';
+	/* ---------------------------------------------------------------
+	   Resume interstitial
+	   --------------------------------------------------------------- */
 
-	// Store a flag in sessionStorage
-	sessionStorage.setItem('popupShown', 'true');
+	function showPopupAndRedirect(url) {
+		var overlay = document.getElementById('popup-overlay');
+		if (!overlay) { window.location.href = url; return; }
 
-	// Set the popup border color to green before redirecting
-	setTimeout(() => {
-		popupMessage.style.borderColor = 'green';
-		setTimeout(() => {
-			popupOverlay.style.display = 'none';
-			sessionStorage.removeItem('popupShown');
-			window.location.href = url;
-		}, 900);
-	}, 1400);
-}
+		var message = document.getElementById('popup-message');
+		overlay.style.display = 'flex';
 
-function hidePopup() {
-	const popupOverlay = document.getElementById('popup-overlay');
-	popupOverlay.style.display = 'none';
-	sessionStorage.removeItem('popupShown');
-}
-
-function checkPopupShown() {
-	const urlParams = new URLSearchParams(window.location.search);
-	if (urlParams.get('popupShown') === 'true' || sessionStorage.getItem('popupShown') === 'true') {
-		hidePopup();
-		urlParams.delete('popupShown');
-		const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
-		history.replaceState(null, '', newUrl);
+		window.setTimeout(function () {
+			if (message) message.style.borderColor = 'var(--tag-ux)';
+			window.setTimeout(function () {
+				overlay.style.display = 'none';
+				window.location.href = url;
+			}, 700);
+		}, 1100);
 	}
-}
 
-window.onload = function() {
-	checkViewport();
-	checkPopupShown();
-};
+	// The resume link is a real href, so it works with JS disabled. When JS is
+	// available we intercept it to fire the analytics event and show the
+	// interstitial before navigating.
+	function initResumeLink() {
+		var link = document.getElementById('resume-link');
+		if (!link) return;
 
-window.onresize = checkViewport;
-
-document.addEventListener('DOMContentLoaded', () => {
-	// Smooth scroll with offset adjustment
-	const offset = 170;
-	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-		anchor.addEventListener('click', function (e) {
+		link.addEventListener('click', function (e) {
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
 			e.preventDefault();
-			const targetId = this.getAttribute('href');
-			if (targetId === "#") {
-				window.scrollTo({
-					top: 0,
-					behavior: 'smooth'
+
+			if (typeof window.gtag === 'function') {
+				window.gtag('event', 'Resume Click', {
+					event_category: 'Button',
+					event_label: 'Resume Download'
 				});
-			} else {
-				const target = document.querySelector(targetId);
-				if (target) {
-					const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-					window.scrollTo({
-						top: targetPosition,
-						behavior: 'smooth'
-					});
-				}
 			}
+			showPopupAndRedirect(link.getAttribute('href'));
 		});
-	});
+	}
 
-	// Initialize display for projects and cards
-	const projects = document.querySelectorAll('article.style2');
-	const cards = document.querySelectorAll('.card');
+	/* ---------------------------------------------------------------
+	   Smooth in-page scrolling with a header offset
+	   --------------------------------------------------------------- */
 
-	projects.forEach(project => project.style.display = 'block');
-	cards.forEach(card => card.style.display = 'block');
+	function initSmoothScroll() {
+		document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+			anchor.addEventListener('click', function (e) {
+				var target = this.getAttribute('href');
+				if (target === '#') {
+					e.preventDefault();
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+					return;
+				}
+				var el;
+				try { el = document.querySelector(target); } catch (err) { return; }
+				if (!el) return;
 
-	// Attach click event to filter buttons
-	const filterButtons = document.querySelectorAll('.filter-bar p');
-	filterButtons.forEach(button => {
-		button.addEventListener('click', () => {
-			const type = button.getAttribute('data-type');
-			const color = button.style.color;
-			filterProjects(type, color);
+				e.preventDefault();
+				var top = el.getBoundingClientRect().top + window.pageYOffset - SCROLL_OFFSET;
+				window.scrollTo({ top: top, behavior: 'smooth' });
+			});
 		});
-	});
-});
+	}
 
-function showFilterPopup(color) {
-	const popup = document.getElementById('filter-popup');
-	const popupText = document.getElementById('filter-popup-text');
-	popupText.style.color = color;
-	popup.classList.add('visible');
+	/* ---------------------------------------------------------------
+	   Tag filtering
+	   --------------------------------------------------------------- */
 
-	setTimeout(() => {
-		popup.classList.remove('visible');
-	}, 800);
-}
+	function showFilterPopup(color) {
+		var popup = document.getElementById('filter-popup');
+		var text = document.getElementById('filter-popup-text');
+		if (!popup) return;
+		if (text && color) text.style.color = color;
+		popup.classList.add('visible');
+		window.setTimeout(function () { popup.classList.remove('visible'); }, 800);
+	}
 
-function filterProjects(type, color) {
-    const lowerType = type.toLowerCase();
-    
-    // ----- Filter Tile Projects (inside <section class="tiles">) -----
-    const tiles = document.querySelectorAll('section.tiles article.style2');
-    tiles.forEach(tile => {
-      const tileType = (tile.getAttribute('data-type') || '').toLowerCase();
-      tile.style.display = (type === 'all' || tileType.includes(lowerType)) ? 'block' : 'none';
-    });
-    
-    // ----- Filter Cards Inside Articles Containers -----
-    // Process each container that holds card(s)
-    const cardContainers = document.querySelectorAll('.container.articles-container');
-    cardContainers.forEach(container => {
-      let anyCardVisible = false;
-      // Process each card within this container
-      const cards = container.querySelectorAll('.card');
-      cards.forEach(card => {
-        let matches = false;
-        if (type === 'all') {
-          matches = true;
-        } else {
-          // Check the card's own data-type attribute
-          const dataType = (card.getAttribute('data-type') || '').toLowerCase();
-          if (dataType && dataType.includes(lowerType)) {
-            matches = true;
-          } else {
-            // First, check for any descendant with the "tag" class
-            const tagElements = card.querySelectorAll('p.tag');
-            for (const tagElem of tagElements) {
-              if (tagElem.textContent.toLowerCase().includes(lowerType)) {
-                matches = true;
-                break;
-              }
-            }
-            // If no match found, also check any <b> elements in case the tags aren't marked with a class
-            if (!matches) {
-              const bElements = card.querySelectorAll('b');
-              for (const bElem of bElements) {
-                if (bElem.textContent.toLowerCase().includes(lowerType)) {
-                  matches = true;
-                  break;
-                }
-              }
-            }
-          }
-        }
-        // Show or hide the card based on whether it matches
-        card.style.display = matches ? 'block' : 'none';
-        if (matches) {
-          anyCardVisible = true;
-        }
-      });
-      // Hide the container if none of its cards are visible; otherwise, show it
-      container.style.display = anyCardVisible ? '' : 'none';
-    });
-    
-    // ----- Update Active State on Filter Buttons -----
-    const buttons = document.querySelectorAll('.filter-bar p');
-    buttons.forEach(button => {
-      button.classList.remove('active');
-      if (button.getAttribute('data-type').toLowerCase() === lowerType) {
-        button.classList.add('active');
-      }
-    });
-    
-    showFilterPopup(color);
-  }
-  
-  
-  
+	function cardMatches(card, lowerType) {
+		var dataType = (card.getAttribute('data-type') || '').toLowerCase();
+		if (dataType && dataType.indexOf(lowerType) !== -1) return true;
 
+		var labels = card.querySelectorAll('p.tag, b');
+		for (var i = 0; i < labels.length; i++) {
+			if (labels[i].textContent.toLowerCase().indexOf(lowerType) !== -1) return true;
+		}
+		return false;
+	}
 
-// Private project click handler
-// Revised handler for private project click events
-document.addEventListener('DOMContentLoaded', () => {
-    const privateProjects = document.querySelectorAll('a.private-project');
-    privateProjects.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent navigation
-        
-        // Locate the article container that wraps this link
-        const article = this.closest('article.style2');
-        let textElements = [];
-        
-        if (article) {
-          // Get all direct children of the article
-          const children = Array.from(article.children);
-          // Filter out the image container and the last <p> element
-          textElements = children.filter((child, index) => {
-            // Skip the image container
-            if (child.classList.contains('image')) return false;
-            // If it's the last element and is a <p>, keep it visible
-            if (child.tagName.toLowerCase() === 'p' && index === children.length - 1) return false;
-            return true;
-          });
-          
-          // Fade out the selected elements
-          textElements.forEach(elem => {
-            elem.style.transition = 'opacity 0.5s';
-            elem.style.opacity = '0';
-          });
-        }
-        
-        // Get the image container where the overlay will be appended
-        let imageContainer = article ? article.querySelector('.image') : this;
-        if (!imageContainer) {
-           imageContainer = this;
-        }
-        
-        // Ensure the image container is positioned relatively
-        if (getComputedStyle(imageContainer).position === 'static') {
-           imageContainer.style.position = 'relative';
-        }
-        
-        // Create and append the overlay element for the private project message
-        let overlay = document.createElement('div');
-        overlay.className = 'private-overlay-image';
-        overlay.innerHTML = '<span class="first-line">Private Project 🔒</span><span class="second-line">reach out for more details...</span>';
-        overlay.style.transition = 'opacity 0.5s';
-        overlay.style.opacity = '0'; // Start transparent
-        imageContainer.appendChild(overlay);
-        
-        // Fade in the overlay
-        requestAnimationFrame(() => {
-          overlay.style.opacity = '1';
-        });
-        
-        // After 2 seconds, fade out the overlay and restore hidden content
-        setTimeout(() => {
-          overlay.style.opacity = '0';
-          setTimeout(() => {
-            if (imageContainer.contains(overlay)) {
-              imageContainer.removeChild(overlay);
-            }
-            // Restore the hidden written content by setting opacity back to 1
-            textElements.forEach(elem => {
-              elem.style.opacity = '1';
-            });
-          }, 500); // Wait for the overlay fade-out to complete
-        }, 2500);
-      });
-    });
-});
+	function filterProjects(type, color) {
+		var lowerType = (type || 'all').toLowerCase();
+		var showAll = lowerType === 'all';
 
+		document.querySelectorAll('section.tiles article').forEach(function (tile) {
+			var tileType = (tile.getAttribute('data-type') || '').toLowerCase();
+			var visible = showAll || tileType.indexOf(lowerType) !== -1;
+			tile.hidden = !visible;
+			tile.style.display = visible ? '' : 'none';
+		});
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Attach click events to any element with the data-copy attribute
-    document.querySelectorAll('[data-copy]').forEach(el => {
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          const textToCopy = el.getAttribute('data-copy');
-          navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-              showCopiedPopup(el);
-            })
-            .catch(err => console.error('Error copying text: ', err));
-        });
-      });
-  });
-  
-  function showCopiedPopup(targetElement) {
-    // Create the popup element
-    const popup = document.createElement('div');
-    popup.textContent = 'Copied to clipboard!';
-    // Style the popup (adjust as needed)
-    popup.style.position = 'absolute';
-    popup.style.background = '#333';
-    popup.style.color = '#fff';
-    popup.style.padding = '5px 10px';
-    popup.style.borderRadius = '5px';
-    popup.style.fontSize = '0.9em';
-    popup.style.zIndex = '10000';
-    popup.style.opacity = '0';
-    popup.style.transition = 'opacity 0.3s';
-  
-    // Append to body so it can be positioned relative to the viewport
-    document.body.appendChild(popup);
-  
-    // Get the bounding rectangle of the clicked element
-    const rect = targetElement.getBoundingClientRect();
-    // Calculate position: For example, place the popup just above the element
-    // You might need to adjust the offset (here, 40px above)
-    popup.style.top = (rect.top + window.pageYOffset - 40) + 'px';
-    popup.style.left = (rect.left + window.pageXOffset) + 'px';
-  
-    // Fade in the popup
-    requestAnimationFrame(() => {
-      popup.style.opacity = '1';
-    });
-  
-    // Remove the popup after 2 seconds
-    setTimeout(() => {
-      popup.style.opacity = '0';
-      setTimeout(() => {
-        popup.remove();
-      }, 300);
-    }, 2000);
-  }
-  
+		document.querySelectorAll('.container.articles-container').forEach(function (container) {
+			var anyVisible = false;
+			container.querySelectorAll('.card').forEach(function (card) {
+				var visible = showAll || cardMatches(card, lowerType);
+				card.style.display = visible ? '' : 'none';
+				if (visible) anyVisible = true;
+			});
+			container.style.display = anyVisible ? '' : 'none';
+		});
+
+		// A tiles section whose every tile is filtered out should collapse too.
+		document.querySelectorAll('section.tiles').forEach(function (section) {
+			var anyVisible = Array.prototype.some.call(
+				section.querySelectorAll('article'),
+				function (t) { return t.style.display !== 'none'; }
+			);
+			section.style.display = anyVisible ? '' : 'none';
+		});
+
+		document.querySelectorAll('.filter-bar p').forEach(function (button) {
+			var isActive = (button.getAttribute('data-type') || '').toLowerCase() === lowerType;
+			button.classList.toggle('active', isActive);
+			button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+		});
+
+		showFilterPopup(color);
+	}
+
+	function initFilters() {
+		document.querySelectorAll('.filter-bar p').forEach(function (button) {
+			button.setAttribute('role', 'button');
+			button.setAttribute('tabindex', '0');
+			button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+
+			function activate() {
+				filterProjects(
+					button.getAttribute('data-type'),
+					window.getComputedStyle(button).color
+				);
+			}
+
+			button.addEventListener('click', activate);
+			button.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+			});
+		});
+	}
+
+	/* ---------------------------------------------------------------
+	   Private projects
+	   --------------------------------------------------------------- */
+
+	function initPrivateProjects() {
+		document.querySelectorAll('a.private-project').forEach(function (link) {
+			link.addEventListener('click', function (e) {
+				e.preventDefault();
+
+				var article = this.closest('article');
+				var imageContainer = article ? article.querySelector('.image') : null;
+				if (!imageContainer) return;
+
+				if (imageContainer.querySelector('.private-overlay-image')) return;
+
+				var link = this;
+				var overlay = document.createElement('div');
+				overlay.className = 'private-overlay-image';
+				overlay.innerHTML =
+					'<span class="first-line">Private project 🔒</span>' +
+					'<span class="second-line">Reach out and I\'ll walk you through it</span>';
+				imageContainer.appendChild(overlay);
+
+				// Fade the tile's own title and tag out first. Without this the
+				// notice lands on top of them and the two sets of text collide.
+				link.classList.add('is-revealing');
+
+				requestAnimationFrame(function () { overlay.classList.add('is-visible'); });
+
+				window.setTimeout(function () {
+					overlay.classList.remove('is-visible');
+					link.classList.remove('is-revealing');
+					window.setTimeout(function () { overlay.remove(); }, 450);
+				}, 2400);
+			});
+		});
+	}
+
+	/* ---------------------------------------------------------------
+	   Click to copy
+	   --------------------------------------------------------------- */
+
+	function showCopiedToast(target, label) {
+		var toast = document.createElement('div');
+		toast.className = 'copy-toast';
+		toast.setAttribute('role', 'status');
+		toast.textContent = label;
+		document.body.appendChild(toast);
+
+		var rect = target.getBoundingClientRect();
+		toast.style.top = (rect.top + window.pageYOffset - 44) + 'px';
+		toast.style.left = (rect.left + window.pageXOffset) + 'px';
+
+		requestAnimationFrame(function () { toast.classList.add('is-visible'); });
+
+		window.setTimeout(function () {
+			toast.classList.remove('is-visible');
+			window.setTimeout(function () { toast.remove(); }, 300);
+		}, 1800);
+	}
+
+	function initCopyTargets() {
+		document.querySelectorAll('[data-copy]').forEach(function (el) {
+			el.addEventListener('click', function (e) {
+				e.preventDefault();
+				var value = el.getAttribute('data-copy');
+
+				var done = function () { showCopiedToast(el, 'Copied to clipboard'); };
+				var failed = function () { showCopiedToast(el, value); };
+
+				if (navigator.clipboard && navigator.clipboard.writeText) {
+					navigator.clipboard.writeText(value).then(done).catch(failed);
+				} else {
+					failed();
+				}
+			});
+		});
+	}
+
+	/* ---------------------------------------------------------------
+	   Boot
+	   --------------------------------------------------------------- */
+
+	function init() {
+		initResumeLink();
+		initSmoothScroll();
+		initFilters();
+		initPrivateProjects();
+		initCopyTargets();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+})();
